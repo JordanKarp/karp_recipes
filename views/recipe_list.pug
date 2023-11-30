@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each recipe in recipe_list
+      li
+        a(href=recipe.url) #{recipe.title}
+
+    else
+      li There are no recipes.

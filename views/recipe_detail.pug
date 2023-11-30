@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 Recipe: #{recipe.title}
+  if recipe.category
+    p #{recipe.category.name}
+  endif 
+  hr
+
+  p
+    a(href=recipe.url+'/delete') Delete Recipe
+  p
+    a(href=recipe.url+'/update') Update Recipe
+
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    
+    h4 Ingredients
+    p(class='ingredients') #{recipe.ingredients}
+    
+    hr
+    
+    h4 Directions
+    p(class='directions') #{recipe.directions}

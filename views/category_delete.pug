@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 #{name}
+  p #{description}
+
+  if category_recipies.length
+
+    p #[strong Delete the following recipies before attempting to delete this category.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Recipies
+
+      ul
+      each recipe in category_recipies
+        li
+          a(href=recipe.url) #{recipe.title}
+
+  else
+    p Do you really want to delete this category?
+
+    form(method='POST' action='')
+      div.form-group
+        input#categoryid.form-control(type='hidden',name='categoryid', required='true', value=category._id )
+
+      button.btn.btn-primary(type='submit') Delete

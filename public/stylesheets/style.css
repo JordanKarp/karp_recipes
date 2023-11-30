@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.sidebar {
+  padding-right: 2rem;
+}
+.sidebar-nav {
+  min-width: 150px;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.ingredients,
+.directions {
+  white-space: pre-wrap
+}
