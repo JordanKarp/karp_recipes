@@ -8,10 +8,11 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const dataRouter = require('./routes/data');
 
+require('dotenv').config();
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://jordanmatthewkarp:izup271Pw38zVjFf@recipesdb.mjhln9k.mongodb.net/?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGO_DB_URI
 
 main().catch((err) => console.log(err));
 async function main() {
