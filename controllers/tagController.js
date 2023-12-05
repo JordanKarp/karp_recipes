@@ -4,7 +4,7 @@ const Tag = require("../models/tag");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
-const TAG_GROUPS = ['Region', 'Cusine Type', 'Flavor','Meal and Menu', 'Cooking Vessel', 'Ingredient', 'Other']
+const TAG_GROUPS = ['Region', 'Cusine Type','Taste', 'Flavor','Meal and Menu', 'Equipment', 'Ingredient', 'Other']
 
 
 // Redirects home

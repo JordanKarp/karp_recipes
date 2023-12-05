@@ -1,12 +1,15 @@
-@charset "utf-8";
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #008ec6;
+  color: #00B7FF;
 }
+
 
 .form-group input,
 .form-group select,
@@ -30,7 +33,6 @@ a {
   margin: .3rem;
 }
 
-/* The side navigation menu */
 .sidebar {
   margin: 0;
   padding: 0;
@@ -42,8 +44,6 @@ a {
   list-style: none;
 
 }
-
-/* Sidebar links */
 .sidebar a {
   display: block;
   color: black;
@@ -52,13 +52,16 @@ a {
 }
 
 
-/* Links on mouse-over */
 .sidebar a:hover {
   background-color: #555;
   color: white;
 }
 
-/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+
+#search {
+  flex-grow:1;
+ }
+ 
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
@@ -69,7 +72,7 @@ div.content {
   background-color: #f1f1f1;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 16px;
+  border-radius: ;
 }
 
 .update,
@@ -94,7 +97,8 @@ div.content {
   }
   .sidebar a {
     float: left;
-    padding: 0 16px;
+    padding: 2px 16px;
+    border-radius: 4px;
     text-decoration: underline;
   }
   div.content {margin-left: 0;}
