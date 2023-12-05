@@ -5,11 +5,15 @@ block content
   div(class='control')
     a(class='update' href=tag.url+'/update' ) Edit Tag
     a(class='delete' href=tag.url+'/delete') Delete
-  h1 Tag: #{tag.name}
+  h1 #{tag.name}
   p Group: #{tag.group}
   p Description: #{tag.description}
   hr
-  h4 Recipes with the tag of #{tag.name}:
+  if tag_recipes.length == 1
+    h4  #{tag_recipes.length} recipe with the tag #{tag.name}:
+  else
+    h4  #{tag_recipes.length} recipes with the tag #{tag.name}:
+  endif
   ul
     each recipe in tag_recipes
       li

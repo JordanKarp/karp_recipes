@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const recipe = require("../models/recipe");
 const Recipe = require("../models/recipe");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
@@ -10,10 +11,12 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display list of all Cateories.
 exports.category_list = asyncHandler(async (req, res, next) => {
-    const allCategories = await Category.find()
-      .sort({ name: 1 })
-      .exec();
-    res.render("category_list", { title: "Category List", category_list: allCategories });
+    const allCategories = await Category.find().sort({ name: 1 }).sort({"_id":1}).exec()
+
+    res.render("category_list", { 
+        title: "Category List", 
+        category_list: allCategories,
+    });
 });
 
 // Display detail page for a specific category.

@@ -12,18 +12,22 @@ block content
   h3 Random Recipe: 
   -console.log(recipe)
   div(class='random')
-    p Recipe: 
+    h4 Recipe: 
         a(href=recipe.url) #{recipe.title}
     p Category: 
       a(href=recipe.category.url) #{recipe.category.name}
-    p Serves: #{recipe.serves || ''}
-    p Tags: 
-      each val, index in recipe.tags
-        - console.log(val)
-        a(href=val.url) #{val.name}
-        if index < recipe.tags.length - 1
-          |, 
-        endif
+    if recipe.serves
+      p Serves: #{recipe.serves}
+    endif
+    if recipe.tags == []
+      p Tags: 
+        each val, index in recipe.tags
+          - console.log(val)
+          a(href=val.url) #{val.name}
+          if index < recipe.tags.length - 1
+            |, 
+          endif
+    endif
     hr
     h4 Ingredients:
     p(class='ingredients') #{recipe.ingredients}

@@ -19,10 +19,10 @@ exports.index = asyncHandler(async (req, res, next) => {
     Recipe.aggregate().sample(1).exec()
   ]);
  
+  // add URL field, and populate category and tag info
   randomRecipe = randomRecipe.map(result => Recipe.hydrate(result));
   await Recipe.populate(randomRecipe, {path: "category tags"});
 
-  console.log(randomRecipe)
   res.render("index", {
     title: "Karp Family Recipes",
     recipe_count: numRecipies,

@@ -3,8 +3,7 @@ extends layout
 block content
   h1= title
 
-  p Search for: #{search_term}
-
+  h4 Search for: #{search_term} (#{results.length})
   ul
     each thing in results
       li

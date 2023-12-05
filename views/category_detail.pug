@@ -5,10 +5,14 @@ block content
   div(class='control')
     a(class='update' href=category.url+'/update' ) Edit Category
     a(class='delete' href=category.url+'/delete') Delete
-  h1 Category: #{category.name}
+  h1 #{category.name}
   p Description: #{category.description}
   hr
-  h4 Recipes under #{category.name}:
+  if category_recipes.length == 1
+    h4  #{category_recipes.length} recipe under #{category.name}:
+  else
+    h4  #{category_recipes.length} recipes under #{category.name}:
+  endif
   ul
     each recipe in category_recipes
       li
