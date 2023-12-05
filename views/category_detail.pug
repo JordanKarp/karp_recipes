@@ -2,24 +2,16 @@ extends layout
 
 block content
 
+  div(class='control')
+    a(class='update' href=category.url+'/update' ) Edit Category
+    a(class='delete' href=category.url+'/delete') Delete
   h1 Category: #{category.name}
   p Description: #{category.description}
-   
-   hr
-  p
-    a(href=category.url+'/delete') Delete Category
-  p
-    a(href=category.url+'/update') Update Category
-
-
-  div(style='margin-left:20px;margin-top:20px')
-
-    h4 Recipes
-
-    ul
-      each recipe in category_recipes
-        li
-          a(href=recipe.url) #{recipe.title}
-
-      else
+  hr
+  h4 Recipes under #{category.name}:
+  ul
+    each recipe in category_recipes
+      li
+        a(href=recipe.url) #{recipe.title}
+    else
         p This category has no recipes

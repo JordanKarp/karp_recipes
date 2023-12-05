@@ -5,10 +5,11 @@ block content
 
   form(method='POST' action='')
     div.form-group
-      label(for='title') Title:
+      label(for='title') #[em(class='req') *] Title:
       input#title.form-control(type='text', placeholder='Name of Recipe' name='title' required='true' value=(undefined===recipe ? '' : recipe.title) )
+
     div.form-group
-      label(for='category') Category:
+      label(for='category') #[em(class='req') *] Category:
       select#category.form-control(type='select', placeholder='Select category' name='category' required='true' )
         for category in categories
           if recipe
@@ -16,13 +17,32 @@ block content
           else
             option(value=category._id) #{category.name}
     div.form-group
-      label(for='ingredients') Ingredients:
-      textarea#ingredients.form-control(type='textarea', placeholder='Ingredients...' name='ingredients' required='true') #{undefined===recipe ? '' : recipe.ingredients}
+      label(for='serves')   Serves:
+      input#serves.form-control(type='text', placeholder='Number of servings' name='serves' value=(undefined===recipe ? '' : recipe.serves) )
     div.form-group
-      label(for='directions') Directions:
-      textarea#directions.form-control(type='textarea', placeholder='Directions...' name='directions' required='true') #{undefined===recipe ? '' : recipe.directions}
-    
-    button.btn.btn-primary(type='submit') Submit
+      label(for='ingredients') #[em(class='req') *] Ingredients:
+      textarea#ingredients.form-control(type='textarea', placeholder='Ingredients...' name='ingredients' required='true' rows='7') #{undefined===recipe ? '' : recipe.ingredients}
+    div.form-group
+      label(for='directions') #[em(class='req') *] Directions:
+      textarea#directions.form-control(type='textarea', placeholder='Directions...' name='directions' required='true' rows='8') #{undefined===recipe ? '' : recipe.directions}
+    div
+      label(for='tags') Tags:
+      div
+        each tag, index in tags
+          if tags[index-1] == undefined || tag.group !== tags[index-1].group
+            div(class='recipeFormTags') #{tag.group}:
+          li(class='tagList')
+            input.checkbox-input(type='checkbox', name='tags', id=tag._id, value=tag._id, checked=tag.checked )
+            label(for=tag._id) #{tag.name}
+        
+        
+        
+        //- for tag in tags
+        //-   div(style='display: inline; padding-right:10px;')
+        //-     input.checkbox-input(type='checkbox', name='tags', id=tag._id, value=tag._id, checked=tag.checked )
+        //-     label(for=tag._id) #{tag.name}
+
+    button.btn.btn-primary(type='submit', style='width: 100%') Submit
 
   if errors
     ul

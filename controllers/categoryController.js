@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 
 // Redirects home
 exports.index = asyncHandler(async (req, res, next) => {
-    res.redirect('/categories')
+    res.redirect('/data/categories')
   });
 
 // Display list of all Cateories.
@@ -46,11 +46,9 @@ exports.category_create_post = [
     // Validate and sanitize the name field.
     body("name", "Category name must contain at least 3 characters")
         .trim()
-        .isLength({ min: 3 })
-        .escape(),
+        .isLength({ min: 3 }),
     body("description")
-        .trim()
-        .escape(),
+        .trim(),
 
     // Process request after validation and sanitization.
     asyncHandler(async (req, res, next) => {
@@ -62,7 +60,6 @@ exports.category_create_post = [
              name: req.body.name, 
              description: req.body.description
         });
-        console.log(category)
 
         if (!errors.isEmpty()) {
         // There are errors. Render the form again with sanitized values/error messages.
@@ -155,11 +152,9 @@ exports.category_update_post = [
      // Validate and sanitize the name field.
     body("name", "Category name must contain at least 3 characters")
         .trim()
-        .isLength({ min: 3 })
-        .escape(),
+        .isLength({ min: 3 }),
     body("description")
-        .trim()
-        .escape(),
+        .trim(),
 
  // Process request after validation and sanitization.
  asyncHandler(async (req, res, next) => {

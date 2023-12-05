@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+
+  each tag, index in tag_list
+    if tag_list[index-1] == undefined || tag.group !== tag_list[index-1].group
+      p #{tag.group}:
+    li(class='tagList')
+      a(href=tag.url) #{tag.name}
+  else
+    li There are no tags.

@@ -7,8 +7,11 @@ const CategorySchema = new Schema({
   description: { type: String, required: false},
 });
 
+
 CategorySchema.virtual("url").get(function () {
   return `/data/category/${this._id}`;
 });
+
+CategorySchema.index({ name: 'text', description: 'text'});
 
 module.exports = mongoose.model("Category", CategorySchema);

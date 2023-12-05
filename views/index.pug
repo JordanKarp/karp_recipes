@@ -6,3 +6,26 @@ block content
   ul
     li Number of Recipes: #{recipe_count}
     li Number of Categories: #{category_count}
+    li Number of Tags: #{tag_count}
+  
+  hr
+  h3 Random Recipe: 
+  -console.log(recipe)
+  div(class='random')
+    p Recipe: 
+        a(href=recipe.url) #{recipe.title}
+    p Category: 
+      a(href=recipe.category.url) #{recipe.category.name}
+    p Serves: #{recipe.serves || ''}
+    p Tags: 
+      each val, index in recipe.tags
+        - console.log(val)
+        a(href=val.url) #{val.name}
+        if index < recipe.tags.length - 1
+          |, 
+        endif
+    hr
+    h4 Ingredients:
+    p(class='ingredients') #{recipe.ingredients}
+    h4 Directions:
+    p(class='directions') #{recipe.directions}

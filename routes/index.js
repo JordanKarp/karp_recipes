@@ -3,12 +3,10 @@ var router = express.Router();
 
 const index_controller = require("../controllers/indexController");
 
-
 /* GET home page. */
 router.get('/', index_controller.index);
 
-// router.get("/data", function (req, res) {
-//     res.redirect("/");
-//   });
+router.post('/search', index_controller.search);
+
 
 module.exports = router;

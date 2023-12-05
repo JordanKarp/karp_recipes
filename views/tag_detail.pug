@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  div(class='control')
+    a(class='update' href=tag.url+'/update' ) Edit Tag
+    a(class='delete' href=tag.url+'/delete') Delete
+  h1 Tag: #{tag.name}
+  p Group: #{tag.group}
+  p Description: #{tag.description}
+  hr
+  h4 Recipes with the tag of #{tag.name}:
+  ul
+    each recipe in tag_recipes
+      li
+        a(href=recipe.url) #{recipe.title}
+    else
+      p This tag has no recipes

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 #{title}: #{tag.name}
+
+  if tag_recipies.length
+
+    p #[strong The following recipes will lose this tag:]
+
+    div(style='margin-left:20px;margin-top:20px')
+      ul
+      each recipe in tag_recipies
+        li
+          a(href=recipe.url) #{recipe.title}
+
+  p Do you really want to delete the tag #{tag.name}?
+
+  form(method='POST' action='')
+      div.form-group
+      input#tagid.form-control(type='hidden',name='tagid', required='true', value=tag._id )
+
+      button.btn.btn-primary(type='submit') Delete

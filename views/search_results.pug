@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  p Search for: #{search_term}
+
+  ul
+    each thing in results
+      li
+        a(href=thing.url) #{thing.title}
+
+    else
+      li No Results.

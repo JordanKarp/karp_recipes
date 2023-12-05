@@ -2,25 +2,25 @@ extends layout
 
 block content
 
+  div(class='control')
+    a(class='update' href=recipe.url+'/update' ) Edit Recipe
+    a(class='delete' href=recipe.url+'/delete') Delete
   h1 Recipe: #{recipe.title}
-  if recipe.category
-    p #{recipe.category.name}
-  endif 
+  p Category: 
+   a(href=recipe.category.url) #{recipe.category.name}
+  p Serves: #{recipe.serves || ''}
+  p Tags: 
+    each val, index in recipe.tags
+      - console.log(val)
+      a(href=val.url) #{val.name}
+      if index < recipe.tags.length - 1
+        |, 
+      endif
   hr
-
-  p
-    a(href=recipe.url+'/delete') Delete Recipe
-  p
-    a(href=recipe.url+'/update') Update Recipe
-
-
-  div(style='margin-left:20px;margin-top:20px')
-
-    
-    h4 Ingredients
-    p(class='ingredients') #{recipe.ingredients}
-    
-    hr
-    
-    h4 Directions
-    p(class='directions') #{recipe.directions}
+  h4 Ingredients:
+  p(class='ingredients') #{recipe.ingredients}
+  
+  hr
+  
+  h4 Directions:
+  p(class='directions') #{recipe.directions}

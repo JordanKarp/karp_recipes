@@ -1,11 +1,12 @@
 const Recipe = require("../models/recipe");
 const Category = require("../models/category");
+const Tag = require("../models/tag");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 
 exports.index = asyncHandler(async (req, res, next) => {
-    res.redirect('/recipies');
+    res.redirect('/data/recipes');
   });
 
 // Display list of all Recipes.
@@ -21,6 +22,7 @@ exports.recipe_list = asyncHandler(async (req, res, next) => {
 exports.recipe_detail = asyncHandler(async (req, res, next) => {
     const recipe = await Recipe.findById(req.params.id)
       .populate('category')
+      .populate('tags')
       .exec();
     if (recipe === null) {
       // No results.
@@ -37,29 +39,47 @@ exports.recipe_detail = asyncHandler(async (req, res, next) => {
 
 // Display recipe create form on GET.
 exports.recipe_create_get = asyncHandler(async (req, res, next) => {
-    // Get all authors and genres, which we can use for adding to our book.
-    const allCategories = await Category.find().sort({ name: 1 }).exec();
-    res.render("recipe_form", { title: "Create Recipe", categories: allCategories });
+    // Get all categories and tags, which we can use for adding to our recipe.
+    const [allCategories, allTags] = await Promise.all([
+      Category.find().sort({ name: 1 }).exec(),
+      Tag.find().sort({ group: 1, name: 1 }).exec(),
+    ]);
+    res.render("recipe_form", { 
+      title: "Create Recipe", 
+      categories: allCategories,
+      tags: allTags,
+     });
 });
 
 // Handle recipe create on POST.
 exports.recipe_create_post = [
+    (req, res, next) => {
+      if (!Array.isArray(req.body.tags)) {
+        req.body.tags =
+          typeof req.body.tags === "undefined" ? [] : [req.body.tags];
+      }
+      next();
+    },
+
+
     // Validate and sanitize fields.
     body("title")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Title must be specified."),
+    body("serves")
+      .trim(),
     body("ingredients")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Ingredients must be specified."),
     body("directions")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Directions must be specified."),
+    body("tags.*")
+      .trim(),
+
   
     // Process request after validation and sanitization.
     asyncHandler(async (req, res, next) => {
@@ -70,16 +90,30 @@ exports.recipe_create_post = [
       const recipe = new Recipe({
         title: req.body.title,
         category: req.body.category,
+        serves: req.body.serves,
         ingredients: req.body.ingredients,
         directions: req.body.directions,
+        tags: req.body.tags,
       });
   
       if (!errors.isEmpty()) {
         // There are errors. Render form again with sanitized values/errors messages.
-        const allCategories = await Category.find().sort({ name: 1 }).exec();
+        const [allCategories, allTags] = await Promise.all([
+          Category.find().sort({ name: 1 }).exec(),
+          Tag.find().sort({ group: 1, name: 1 }).exec(),
+        ]);
+        
+        // Mark our selected tags as checked.
+        for (const tag of allTags) {
+          if (recipe.tags.includes(tag._id)) {
+            tag.checked = "true";
+          }
+        }
+
         res.render("recipe_form", {
             title: "Create Recipe",
             categories: allCategories,
+            tags: allTags,
             recipe: recipe,
             errors: errors.array()
         });
@@ -118,9 +152,10 @@ exports.recipe_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display recipe update form on GET.
 exports.recipe_update_get = asyncHandler(async (req, res, next) => {
-  const [recipe, allCategories] = await Promise.all([
+  const [recipe, allCategories, allTags] = await Promise.all([
     Recipe.findById(req.params.id).exec(),
-    Category.find().sort({ name: 1 }).exec()
+    Category.find().sort({ name: 1 }).exec(),
+    Tag.find().sort({ group: 1, name: 1 }).exec()
   ]);
 
   if (recipe === null) {
@@ -130,31 +165,50 @@ exports.recipe_update_get = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
+    // Mark our selected tags as checked.
+    for (const tag of allTags) {
+      for (const recipe_tag of recipe.tags) {
+        if (tag._id.toString() === recipe_tag._id.toString()) {
+          tag.checked = "true";
+        }
+      }
+    }
+
   res.render("recipe_form", {
     title: "Update Recipe",
     recipe: recipe,
-    categories: allCategories
+    categories: allCategories,
+    tags: allTags
   });
 });
 
 // Handle recipe update on POST.
 exports.recipe_update_post = [
+    (req, res, next) => {
+      if (!Array.isArray(req.body.tags)) {
+        req.body.tags =
+          typeof req.body.tags === "undefined" ? [] : [req.body.tags];
+      }
+      next();
+    },
+
     // Validate and sanitize fields.
     body("title")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Title must be specified."),
+    body("serves")
+      .trim(),
     body("ingredients")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Ingredients must be specified."),
     body("directions")
       .trim()
       .isLength({ min: 1 })
-      .escape()
       .withMessage("Directions must be specified."),
+    body("tags.*")
+      .trim(),
 
     // Process request after validation and sanitization.
     asyncHandler(async (req, res, next) => {
@@ -165,17 +219,31 @@ exports.recipe_update_post = [
       const recipe = new Recipe({
         title: req.body.title,
         category: req.body.category,
+        serves: req.body.serves,
         ingredients: req.body.ingredients,
         directions: req.body.directions,
+        tags: typeof req.body.tags === "undefined" ? [] : req.body.tags,
         _id: req.params.id,
       });
 
       if (!errors.isEmpty()) {
         // There are errors. Render form again with sanitized values/errors messages.
-        const allCategories = await Category.find().sort({ name: 1 }).exec();
+        const [allCategories, allTags] = await Promise.all([
+          Category.find().sort({ name: 1 }).exec(),
+          Tag.find().sort({ group: 1, name: 1 }).exec(),
+        ]);
+
+        // Mark our selected genres as checked.
+        for (const tag of allTags) {
+          if (recipe.tags.indexOf(tag._id) > -1) {
+            tag.checked = "true";
+          }
+        }
+
         res.render("recipe_form", {
             title: "Update Recipe",
             categories: allCategories,
+            tags: allTags,
             recipe: recipe,
             errors: errors.array()
         });
