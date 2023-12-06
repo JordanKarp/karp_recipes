@@ -7,9 +7,17 @@ body {
 }
 
 a {
+  color: #00597c;
+}
+
+a:hover {
   color: #00B7FF;
 }
 
+
+hr {
+  border-top: 1px solid #00597c;
+}
 
 .form-group input,
 .form-group select,
@@ -53,7 +61,7 @@ a {
 
 
 .sidebar a:hover {
-  background-color: #555;
+  background-color: #00597c;
   color: white;
 }
 
