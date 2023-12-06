@@ -1,6 +1,12 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  h1 Hmm, that's not supposed to happen.
+  h2 #{error.status} Error - #{message}
+
+  details 
+    pre #{error.stack}
+
+  p
+    a(href="/") Go Back
+

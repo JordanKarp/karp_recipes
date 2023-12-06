@@ -34,14 +34,6 @@ block content
           li(class='tagList')
             input.checkbox-input(type='checkbox', name='tags', id=tag._id, value=tag._id, checked=tag.checked )
             label(for=tag._id) #{tag.name}
-        
-        
-        
-        //- for tag in tags
-        //-   div(style='display: inline; padding-right:10px;')
-        //-     input.checkbox-input(type='checkbox', name='tags', id=tag._id, value=tag._id, checked=tag.checked )
-        //-     label(for=tag._id) #{tag.name}
-
     button.btn.btn-primary(type='submit', style='width: 100%') Submit
 
   if errors
