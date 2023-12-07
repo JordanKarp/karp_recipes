@@ -5,7 +5,7 @@ block content
   div(class='control')
     a(class='update' href=recipe.url+'/update' ) Edit Recipe
     a(class='delete' href=recipe.url+'/delete') Delete
-  h1 Recipe: #{recipe.title}
+  h1 #{recipe.title}
   p Category: 
    a(href=recipe.category.url) #{recipe.category.name}
   p Serves: #{recipe.serves || ''}
