@@ -1,6 +1,7 @@
 // const Tag = require("../models/tag");
 const Recipe = require("../models/recipe");
 const Tag = require("../models/tag");
+const Change = require("../models/change");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -102,6 +103,13 @@ exports.tag_create_post = [
               res.redirect(tagExists.url);
           } else {
               await tag.save();
+              const change = new Change({
+                user: req.user.username, 
+                docType: 'Tag',
+                doc: tag.name,
+                changeType: 'create'
+              });
+              await change.save()
               // New tag saved. Redirect to tag detail page.
               res.redirect(tag.url);
           }
@@ -141,6 +149,14 @@ exports.tag_delete_post = [
 
     // Delete object and redirect to the list of tags.
     await Tag.findByIdAndDelete(req.body.tagid);
+
+    const change = new Change({
+      user: req.user.username, 
+      docType: 'Tag',
+      doc: tag.name,
+      changeType: 'delete'
+    });
+    await change.save()
     res.redirect("/data/tags");
 
   })];
@@ -202,6 +218,14 @@ exports.tag_update_post = [
          // Data from form is valid.
                // Data from form is valid. Update the record.
             const updatedTag = await Tag.findByIdAndUpdate(req.params.id, tag, {});
+            const change = new Change({
+              user: req.user.username, 
+              docType: 'Tag',
+              doc: updatedTag.name,
+              changeType: 'update'
+            });
+            await change.save()
+            
             // Redirect to book detail page.
             res.redirect(updatedTag.url);
     }

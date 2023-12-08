@@ -1,5 +1,6 @@
 const Category = require("../models/category");
 const Recipe = require("../models/recipe");
+const Change = require("../models/change");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -67,6 +68,7 @@ exports.category_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
+        console.log(req.body.name)
         // Create a category object with escaped and trimmed data.
         const category = new Category({
              name: req.body.name, 
@@ -83,6 +85,7 @@ exports.category_create_post = [
             });
         return;
         } else {
+            console.log(category)
             // Data from form is valid.
             // Check if category with same name already exists.
             const categoryExists = await Category.findOne({ name: req.body.name })
@@ -93,12 +96,21 @@ exports.category_create_post = [
                 res.redirect(categoryExists.url);
             } else {
                 await category.save();
+                const change = new Change({
+                  user: req.user.username, 
+                  docType: 'Category',
+                  doc: category.name,
+                  changeType: 'create'
+                });
+                await change.save()
                 // New category saved. Redirect to category detail page.
                 res.redirect(category.url);
             }
         }
     }),
 ];
+
+
 
 // Display category delete form on GET.
 exports.category_delete_get = [
@@ -145,6 +157,14 @@ exports.category_delete_post = [
     } else {
       // Category has no recipies. Delete object and redirect to the list of categorys.
       await Category.findByIdAndDelete(req.body.categoryid);
+      const change = new Change({
+        user: req.user.username, 
+        docType: 'Category',
+        doc: category.name,
+        changeType: 'delete'
+      });
+      await change.save()
+
       res.redirect("/data/categories");
     }
   })];
@@ -205,6 +225,13 @@ exports.category_update_post = [
                // Data from form is valid. Update the record.
             const updatedCategory = await Category.findByIdAndUpdate(req.params.id, category, {});
             // Redirect to book detail page.
+            const change = new Change({
+              user: req.user.username, 
+              docType: 'Category',
+              doc: category.name,
+              changeType: 'update'
+            });
+            await change.save()
             res.redirect(updatedCategory.url);
     }
  }),

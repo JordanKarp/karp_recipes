@@ -2,10 +2,13 @@ const Recipe = require("../models/recipe");
 const Category = require("../models/category");
 const Tag = require("../models/tag");
 const User = require("../models/user");
+const Change = require("../models/change");
 
 const passport = require('passport')
 const asyncHandler = require("express-async-handler");
 const { genPassword } = require("../config/passwordUtils");
+
+const { isAuth } = require("../config/authMiddleware");
 
 
 exports.index = asyncHandler(async (req, res, next) => {
@@ -48,7 +51,17 @@ exports.search = asyncHandler(async (req, res, next) => {
 });
 
 
-
+exports.changelog = [
+  isAuth,
+  asyncHandler(async (req, res, next) => {
+    const allChanges = await Change.find().sort({ createdAt: -1 })
+    res.render("changelog", {
+      title: "Changelog",
+      all_changes: allChanges,
+      user: req.user || '',
+    });
+  })
+];
 
 
 exports.login = passport.authenticate('local', {
@@ -76,6 +89,13 @@ exports.register = asyncHandler( async(req, res, next) => {
   });
 
   await newUser.save()
+  const change = new Change({
+    user: newUser.username, 
+    docType: 'User',
+    doc: newUser.username,
+    changeType: 'create'
+  });
+  await change.save()
   req.login(newUser, function(err) {
     if (err) { return next(err); }
     return res.redirect('/');
