@@ -6,11 +6,11 @@ block content
   form(method='POST' action='')
     div.form-group
       label(for='title') #[em(class='req') *] Title:
-      input#title.form-control(type='text', placeholder='Name of Recipe' name='title' required='true' value=(undefined===recipe ? '' : recipe.title) )
+      input#title(type='text', placeholder='Name of Recipe' name='title' required='true' value=(undefined===recipe ? '' : recipe.title) )
 
     div.form-group
       label(for='category') #[em(class='req') *] Category:
-      select#category.form-control(type='select', placeholder='Select category' name='category' required='true' )
+      select#category(type='select', placeholder='Select category' name='category' required='true' )
         for category in categories
           if recipe
             option(value=category._id selected=(category._id.toString()===recipe.category._id.toString() ? 'selected' : false) ) #{category.name}
@@ -18,13 +18,13 @@ block content
             option(value=category._id) #{category.name}
     div.form-group
       label(for='serves')   Serves:
-      input#serves.form-control(type='text', placeholder='Number of servings' name='serves' value=(undefined===recipe ? '' : recipe.serves) )
+      input#serves(type='text', placeholder='Number of servings' name='serves' value=(undefined===recipe ? '' : recipe.serves) )
     div.form-group
       label(for='ingredients') #[em(class='req') *] Ingredients:
-      textarea#ingredients.form-control(type='textarea', placeholder='Ingredients...' name='ingredients' required='true' rows='7') #{undefined===recipe ? '' : recipe.ingredients}
+      textarea#ingredients(type='textarea', placeholder='Ingredients...' name='ingredients' required='true' rows='7') #{undefined===recipe ? '' : recipe.ingredients}
     div.form-group
       label(for='directions') #[em(class='req') *] Directions:
-      textarea#directions.form-control(type='textarea', placeholder='Directions...' name='directions' required='true' rows='8') #{undefined===recipe ? '' : recipe.directions}
+      textarea#directions(type='textarea', placeholder='Directions...' name='directions' required='true' rows='8') #{undefined===recipe ? '' : recipe.directions}
     div
       label(for='tags') Tags:
       div

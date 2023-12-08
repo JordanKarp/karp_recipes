@@ -46,7 +46,8 @@ exports.search = asyncHandler(async (req, res, next) => {
   res.render("search_results", {
     title: "Search Results",
     search_term: searchTerm,
-    results: allResults
+    results: allResults,
+    user: req.user || '',
   });
 });
 
