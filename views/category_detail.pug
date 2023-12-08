@@ -2,9 +2,18 @@ extends layout
 
 block content
 
-  div(class='control')
-    a(class='update' href=category.url+'/update' ) Edit Category
-    a(class='delete' href=category.url+'/delete') Delete
+  if user
+    div(class='control')
+      a(class='update' href=category.url+'/update' ) Edit Category
+      a(class='delete' href=category.url+'/delete') Delete
+  else
+    div(class='control')
+      p
+        a(href="/login") Login
+        |  or 
+        a(href="/register") create an account
+        |  to edit.
+
   h1 #{category.name}
   p Description: #{category.description}
   hr

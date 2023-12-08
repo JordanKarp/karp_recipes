@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+  h1 User: #{selected_user.username}
+
+  hr
+  p
+    a(href=selected_user.url+'/delete') Delete user

@@ -1,28 +1,50 @@
-const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
+const mongoose = require("mongoose");
+
+const MongoStore = require('connect-mongo')
+const passport =  require('passport');
+
+const createError = require('http-errors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const dataRouter = require('./routes/data');
+const userRouter = require('./routes/user');
 
 const compression = require("compression");
 const helmet = require("helmet");
 
 require('dotenv').config();
+require('./config/passport')
 
-const mongoose = require("mongoose");
+
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGO_DB_URI
+
+
+const app = express();
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: mongoDB,
+    collectionName: 'sessions'
+  }),
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
-
-const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +59,7 @@ app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/data', dataRouter);
 
 

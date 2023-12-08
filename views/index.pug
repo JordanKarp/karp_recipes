@@ -1,6 +1,22 @@
 extends layout
 
 block content
+
+  if user
+    div(class='control')
+      p Logged in as 
+        a(href=user.url) #{user.username}
+        |  (
+        a(href='logout') Logout?
+        | )  
+  else
+    div(class='control')
+      p
+        a(href="/login") Login
+        |  or 
+        a(href="/register") create an account
+        |  to edit.
+
   h1= title
   p Welcome to #{title}
   ul

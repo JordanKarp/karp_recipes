@@ -2,9 +2,18 @@ extends layout
 
 block content
 
-  div(class='control')
-    a(class='update' href=tag.url+'/update' ) Edit Tag
-    a(class='delete' href=tag.url+'/delete') Delete
+  if user
+    div(class='control')
+      a(class='update' href=tag.url+'/update' ) Edit Tag
+      a(class='delete' href=tag.url+'/delete') Delete
+  else
+    div(class='control')
+      p
+        a(href="/login") Login
+        |  or 
+        a(href="/register") create an account
+        |  to edit.
+
   h1 #{tag.name}
   p Group: #{tag.group}
   p Description: #{tag.description}

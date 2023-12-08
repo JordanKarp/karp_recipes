@@ -1,8 +1,11 @@
 const Recipe = require("../models/recipe");
 const Category = require("../models/category");
 const Tag = require("../models/tag");
+const User = require("../models/user");
 
+const passport = require('passport')
 const asyncHandler = require("express-async-handler");
+const { genPassword } = require("../config/passwordUtils");
 
 
 exports.index = asyncHandler(async (req, res, next) => {
@@ -29,18 +32,52 @@ exports.index = asyncHandler(async (req, res, next) => {
     category_count: numCategories,
     tag_count: numTags,
     recipe: randomRecipe[0],
+    user: req.user || ''
   });
 });
 
 
 exports.search = asyncHandler(async (req, res, next) => {
   const searchTerm = req.body.search
-  // db.test.createIndex({ "$**": "text" },{ name: "TextIndex" })
   const allResults = await Recipe.find({ $text : { $search : searchTerm } }).sort({ title: 1 })
-  // const allResults = await Recipe.find({title: searchTerm})
   res.render("search_results", {
     title: "Search Results",
     search_term: searchTerm,
     results: allResults
+  });
+});
+
+
+
+
+
+exports.login = passport.authenticate('local', {
+  failureMessage: true,
+  failureRedirect: 'login',
+  successRedirect: '/'
+});
+
+exports.logout =(req,res, next) => {
+  req.logout(function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/');
+    });
+};
+
+
+exports.register = asyncHandler( async(req, res, next) => {
+  const saltHash = genPassword(req.body.password);
+  const {salt, hash} = saltHash;
+
+  const newUser = new User({
+      username:req.body.username,
+      hash: hash,
+      salt: salt,
+  });
+
+  await newUser.save()
+  req.login(newUser, function(err) {
+    if (err) { return next(err); }
+    return res.redirect('/');
   });
 });

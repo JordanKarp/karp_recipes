@@ -2,9 +2,18 @@ extends layout
 
 block content
 
-  div(class='control')
-    a(class='update' href=recipe.url+'/update' ) Edit Recipe
-    a(class='delete' href=recipe.url+'/delete') Delete
+  if user
+    div(class='control')
+      a(class='update' href=recipe.url+'/update' ) Edit Recipe
+      a(class='delete' href=recipe.url+'/delete') Delete
+  else
+    div(class='control')
+      p
+        a(href="/login") Login
+        |  or 
+        a(href="/register") create an account
+        |  to edit.
+
   h1 #{recipe.title}
   p Category: 
    a(href=recipe.category.url) #{recipe.category.name}

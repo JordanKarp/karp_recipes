@@ -13,18 +13,22 @@ html
           a(href='/data/recipes') All Recipes
           a(href='/data/categories') All Categories
           a(href='/data/tags') All Tags
-        hr
-        div
-          a(href='/data/recipe/create') New recipe
-          a(href='/data/category/create') New category
-          a(href='/data/tag/create') New tag
-        hr
+        if user
+          a(href='/user/all') All Users
+          hr
+          div
+            a(href='/data/recipe/create') Create recipe
+            a(href='/data/category/create') Create category
+            a(href='/data/tag/create') Create tag
+        endif
         div
           form(method='POST' action='/search')
             div(style='display:flex')
               input#search.form-control(type='text', placeholder='Search...' name='search')
               button(type='submit' class='searchButton')
                 img(src='/images/search-regular-24.png')
+
+
 
     div(class='content')
       block content

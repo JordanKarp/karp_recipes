@@ -1,8 +1,9 @@
 const Category = require("../models/category");
-const recipe = require("../models/recipe");
 const Recipe = require("../models/recipe");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+
+const { isAuth } = require("../config/authMiddleware");
 
 // Redirects home
 exports.index = asyncHandler(async (req, res, next) => {
@@ -16,6 +17,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
     res.render("category_list", { 
         title: "Category List", 
         category_list: allCategories,
+        user: req.user || ''
     });
 });
 
@@ -36,16 +38,23 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
         title: "Category Detail",
         category: category,
         category_recipes: recipiesInCategory,
+        user: req.user || ''
     });
 });
 
 // Display category create form on GET.
-exports.category_create_get = (req, res, next) => {
-    res.render("category_form", { title: "Create New Category" });
-  };
+exports.category_create_get = [
+    isAuth,
+    (req, res, next) => {
+    res.render("category_form", { 
+      title: "Create New Category",
+      user: req.user || ''
+    });
+  }];
 
 // Handle category create on POST.
 exports.category_create_post = [
+    isAuth,
     // Validate and sanitize the name field.
     body("name", "Category name must contain at least 3 characters")
         .trim()
@@ -70,6 +79,7 @@ exports.category_create_post = [
                 title: "Create New Category",
                 category: category,
                 errors: errors.array(),
+                user: req.user || ''
             });
         return;
         } else {
@@ -91,7 +101,9 @@ exports.category_create_post = [
 ];
 
 // Display category delete form on GET.
-exports.category_delete_get = asyncHandler(async (req, res, next) => {
+exports.category_delete_get = [
+  isAuth,
+  asyncHandler(async (req, res, next) => {
     // Get details of author and all their books (in parallel)
     const [category, allRecipiesInCategory] = await Promise.all([
       Category.findById(req.params.id).exec(),
@@ -107,11 +119,14 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
       title: "Delete Category",
       category: category,
       category_recipies: allRecipiesInCategory,
+      user: req.user || ''
     });
-  });
+  })];
 
 // Handle category delete on POST.
-exports.category_delete_post = asyncHandler(async (req, res, next) => {
+exports.category_delete_post = [
+  isAuth,
+  asyncHandler(async (req, res, next) => {
     // Get details of author and all their recipies (in parallel)
     const [category, allRecipiesInCategory] = await Promise.all([
       Category.findById(req.params.id).exec(),
@@ -124,6 +139,7 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
         title: "Delete Category",
         category: category,
         category_recipies: allRecipiesInCategory,
+        user: req.user || ''
       });
       return;
     } else {
@@ -131,10 +147,12 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
       await Category.findByIdAndDelete(req.body.categoryid);
       res.redirect("/data/categories");
     }
-  });
+  })];
 
 // Display category update form on GET.
-exports.category_update_get = asyncHandler(async (req, res, next) => {
+exports.category_update_get = [
+  isAuth,
+  asyncHandler(async (req, res, next) => {
     const category = await Category.findById(req.params.id).exec()
 
     if (category === null) {
@@ -147,17 +165,19 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", {
       title: "Update Category",
       category: category,
+      user: req.user || ''
     });
-  });
+  })];
 
 // Handle category update on POST.
 exports.category_update_post = [
-     // Validate and sanitize the name field.
-    body("name", "Category name must contain at least 3 characters")
-        .trim()
-        .isLength({ min: 3 }),
-    body("description")
-        .trim(),
+  isAuth,
+    // Validate and sanitize the name field.
+  body("name", "Category name must contain at least 3 characters")
+      .trim()
+      .isLength({ min: 3 }),
+  body("description")
+      .trim(),
 
  // Process request after validation and sanitization.
  asyncHandler(async (req, res, next) => {
@@ -177,6 +197,7 @@ exports.category_update_post = [
              title: "Update Category",
              category: category,
              errors: errors.array(),
+             user: req.user || ''
          });
      return;
      } else {

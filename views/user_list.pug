@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each person in user_list
+      li
+        a(href=person.url) #{person.username}
+    else
+      li There are no users.

@@ -17,7 +17,7 @@ block content
             option(value=group) #{group}
       label(for='description') Description:
       input#description.form-control(type='text', placeholder='Short description...' name='description' value=(undefined===tag ? '' : tag.description) )
-    button.btn.btn-primary(type='submit') Submit
+    button#submit(type='submit') Submit
 
   if errors
     ul
