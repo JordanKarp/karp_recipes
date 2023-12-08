@@ -136,6 +136,13 @@ exports.recipe_create_post = [
 
       // Save recipe.
       await recipe.save();
+      const change = new Change({
+        user: req.user.username, 
+        docType: 'Recipe',
+        doc: recipe.title,
+        changeType: 'create'
+      });
+      await change.save()
       // Redirect to new recipe record.
       res.redirect(recipe.url);
     }
@@ -164,7 +171,14 @@ exports.recipe_delete_get = [
 exports.recipe_delete_post = [
   isAuth,
   asyncHandler(async (req, res, next) => {
-    await Recipe.findByIdAndDelete(req.body.recipeid);
+    const recipe = await Recipe.findByIdAndDelete(req.body.recipeid);
+    const change = new Change({
+      user: req.user.username, 
+      docType: 'Recipe',
+      doc: recipe.title,
+      changeType: 'delete'
+    });
+    await change.save()
     res.redirect("/data/recipes");
 })];
 
@@ -276,6 +290,14 @@ exports.recipe_update_post = [
 
         // Update recipe.
         const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, recipe, {})
+        const change = new Change({
+          user: req.user.username, 
+          docType: 'Recipe',
+          doc: updatedRecipe.title,
+          changeType: 'update'
+        });
+        await change.save()
+
         // Redirect to new recipe record.
         res.redirect(updatedRecipe.url);
       }
