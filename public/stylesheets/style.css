@@ -69,11 +69,16 @@ hr {
 #search {
   flex-grow:1;
  }
- 
+
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
-  height: 95vh;
+  height: 100%;
+}
+
+.footer {
+  margin-left: 200px;
+  text-align: center;
 }
 
 .random {
@@ -113,10 +118,15 @@ div.content {
   }
   .sidebar a {
     float: left;
-    padding: 2px 16px;
+    padding: 6px;
     border-radius: 4px;
     text-decoration: underline;
   }
+
+  hr {
+    display: none;
+  }
+  .footer,
   div.content {margin-left: 0;}
 }
 

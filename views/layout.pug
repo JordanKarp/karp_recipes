@@ -14,11 +14,10 @@ html
           a(href='/data/categories') All Categories
           a(href='/data/tags') All Tags
         if user
-          a(href='/user/all') All Users
-          a(href='/changelog') Change Log
-
           hr
           div
+            a(href='/user/all') Users
+            a(href='/changelog') Change Log
             a(href='/data/recipe/create') Create recipe
             a(href='/data/category/create') Create category
             a(href='/data/tag/create') Create tag
@@ -34,3 +33,7 @@ html
 
     div(class='content')
       block content
+
+    div(class='footer')
+      p © Copyright 2023, 
+       a(href='https://jordankarp.github.io/') Jordan Karp
