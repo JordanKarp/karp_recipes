@@ -4,6 +4,7 @@ block content
 
   if user
     div(class='control')
+      a(class='addComment' href=recipe.url+'/comment' ) Add Comment
       a(class='update' href=recipe.url+'/update' ) Edit Recipe
       a(class='delete' href=recipe.url+'/delete') Delete
   else
@@ -20,7 +21,6 @@ block content
   p Serves: #{recipe.serves || ''}
   p Tags: 
     each val, index in recipe.tags
-      - console.log(val)
       a(href=val.url) #{val.name}
       if index < recipe.tags.length - 1
         |, 
@@ -33,3 +33,8 @@ block content
   
   h4 Directions:
   p(class='directions') #{recipe.directions}
+
+  h4 Comments:
+  ul(class='commentList')
+    each com in recipe.comments 
+      li(class='comment') #{com.username} (#{com.date}): #{com.content}

@@ -9,6 +9,7 @@ const RecipeSchema = new Schema({
   ingredients: { type: String, required: true },
   directions: { type: String, required: true },
   tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 

@@ -17,7 +17,7 @@ ChangeSchema.virtual('date').get(function () {
 });
 
 ChangeSchema.virtual("description").get(function () {
-  return `${this.date} - ${this.user} ${this.changeType}d the ${this.docType} ${this.doc}`;
+  return `${this.date} - ${this.user} ${this.changeType}d the ${this.docType}: ${this.doc}`;
 });
 
 module.exports = mongoose.model("Change", ChangeSchema);

@@ -2,6 +2,7 @@ const Recipe = require("../models/recipe");
 const Category = require("../models/category");
 const Tag = require("../models/tag");
 const Change = require("../models/change");
+const Comment = require("../models/comment");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -31,6 +32,7 @@ exports.recipe_detail = asyncHandler(async (req, res, next) => {
     const recipe = await Recipe.findById(req.params.id)
       .populate('category')
       .populate('tags')
+      .populate('comments')
       .exec();
     if (recipe === null) {
       // No results.
@@ -303,4 +305,77 @@ exports.recipe_update_post = [
         res.redirect(updatedRecipe.url);
       }
     }),
+];
+
+// Display recipe create form on GET.
+exports.recipe_comment_get = [
+  isAuth,
+  asyncHandler(async (req, res, next) => {
+    const recipe = await Recipe.findById(req.params.id).exec()
+    
+    if (recipe === null) {
+      // No results.
+      const err = new Error("Recipe not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("comment_form", { 
+      title: "Add Comment", 
+      recipe: recipe,
+      user: req.user || '',
+     });
+})];
+
+// Handle recipe create on POST.
+exports.recipe_comment_post = [
+  isAuth,
+  // Validate and sanitize fields.
+  body("content")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Comment cannot be blank."),
+
+  // Process request after validation and sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    const recipe = await Recipe.findById(req.params.id).exec()
+    // Create Recipe object with escaped and trimmed data
+    const comment = new Comment({
+      username: req.user.username,
+      content: req.body.content,
+      recipe: recipe,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/errors messages.
+
+      res.render("comment_form", {
+          title: "Add Comment",
+          recipe: recipe,
+          comment: comment,
+          errors: errors.array(),
+          user: req.user,
+      });
+      return;
+    } else {
+      // Data from form is valid.
+
+      // Save recipe.
+      const change = new Change({
+        user: req.user.username,
+        docType: 'Recipe',
+        doc: recipe.title,
+        changeType: 'commente'
+      });
+      await comment.save();
+      await recipe.comments.push(comment)
+      await recipe.save();
+      await change.save()
+      // Redirect to new recipe record.
+      res.redirect(recipe.url);
+    }
+  }),
 ];

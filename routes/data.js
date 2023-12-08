@@ -60,6 +60,12 @@ router.get("/recipe/:id/update", recipe_controller.recipe_update_get);
 // POST request to update recipe.
 router.post("/recipe/:id/update", recipe_controller.recipe_update_post);
 
+// GET request to add a comment to this recipe.
+router.get("/recipe/:id/comment", recipe_controller.recipe_comment_get);
+
+// POST request to add a comment to this recipe.
+router.post("/recipe/:id/comment", recipe_controller.recipe_comment_post);
+
 // GET request for one recipe.
 router.get("/recipe/:id", recipe_controller.recipe_detail);
 

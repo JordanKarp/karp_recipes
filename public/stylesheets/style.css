@@ -82,6 +82,7 @@ div.content {
   margin: 1rem;
 }
 .control,
+.addComment,
 .update,
 .delete {
   float: right;
