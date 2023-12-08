@@ -1,6 +1,7 @@
 const Recipe = require("../models/recipe");
 const Category = require("../models/category");
 const Tag = require("../models/tag");
+const Change = require("../models/change");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
