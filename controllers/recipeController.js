@@ -32,7 +32,10 @@ exports.recipe_detail = asyncHandler(async (req, res, next) => {
     const recipe = await Recipe.findById(req.params.id)
       .populate('category')
       .populate('tags')
-      .populate('comments')
+      .populate({
+        path: 'comments',			
+        populate: { path:  'user', model: 'User' }
+      })
       .exec();
     if (recipe === null) {
       // No results.
@@ -140,10 +143,10 @@ exports.recipe_create_post = [
       // Save recipe.
       await recipe.save();
       const change = new Change({
-        user: req.user.username, 
+        user: req.user, 
         docType: 'Recipe',
-        doc: recipe.title,
-        changeType: 'create'
+        doc: recipe,
+        changeType: 'created'
       });
       await change.save()
       // Redirect to new recipe record.
@@ -176,10 +179,10 @@ exports.recipe_delete_post = [
   asyncHandler(async (req, res, next) => {
     const recipe = await Recipe.findByIdAndDelete(req.body.recipeid);
     const change = new Change({
-      user: req.user.username, 
+      user: req.user, 
       docType: 'Recipe',
-      doc: recipe.title,
-      changeType: 'delete'
+      doc: recipe,
+      changeType: 'deleted'
     });
     await change.save()
     res.redirect("/data/recipes");
@@ -294,10 +297,10 @@ exports.recipe_update_post = [
         // Update recipe.
         const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, recipe, {})
         const change = new Change({
-          user: req.user.username, 
+          user: req.user, 
           docType: 'Recipe',
-          doc: updatedRecipe.title,
-          changeType: 'update'
+          doc: updatedRecipe,
+          changeType: 'updated'
         });
         await change.save()
 
@@ -345,6 +348,7 @@ exports.recipe_comment_post = [
     // Create Recipe object with escaped and trimmed data
     const comment = new Comment({
       username: req.user.username,
+      user: req.user,
       content: req.body.content,
       recipe: recipe,
     });
@@ -365,10 +369,10 @@ exports.recipe_comment_post = [
 
       // Save recipe.
       const change = new Change({
-        user: req.user.username,
+        user: req.user,
         docType: 'Recipe',
-        doc: recipe.title,
-        changeType: 'commente'
+        doc: recipe,
+        changeType: 'commented on'
       });
       await comment.save();
       await recipe.comments.push(comment)

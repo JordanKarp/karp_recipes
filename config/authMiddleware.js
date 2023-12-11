@@ -10,5 +10,9 @@ module.exports.isAdmin = (req, res, next) => {
     // TODO
 }
 module.exports.isCurrentUser = (req, res, next) => {
-    // TODO
+    if (req.params.id == req.user._id) {
+      next()
+    } else {
+      res.render('edit_error')
+    }
 }

@@ -1,11 +1,12 @@
 const User = require("../models/user");
 const Change = require("../models/change");
+const Comment = require("../models/comment");
 
 const passport = require('passport')
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
-const { isAuth } = require("../config/authMiddleware");
+const { isAuth, isCurrentUser } = require("../config/authMiddleware");
 
 
 // Display list of all Users.
@@ -24,7 +25,19 @@ exports.user_list = [
 exports.user_detail = [
   isAuth,
   asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.params.id).exec();
+    const [user, userChanges, userComments] = await Promise.all([
+      User.findById(req.params.id).exec(),
+      Change.find({user: req.params.id})
+        .populate('user')
+        .populate('doc')
+        .sort({ createdAt: -1 })
+        .exec(),
+      Comment.find({user: req.params.id})
+        .populate('recipe')
+        .populate('user')
+        .sort({ createdAt: -1 })
+        .exec(),
+    ]) 
   
     if (user === null) {
       // No results.
@@ -32,11 +45,13 @@ exports.user_detail = [
       err.status = 404;
       return next(err);
     }
-  
+    // console.log(req.params.id == req.user._id)
     res.render("user_detail", {
       title: "User Detail",
       selected_user: user,
-      user: req.user || ''
+      selected_user_comments: userComments,
+      selected_user_changes: userChanges,
+      user: req.user || '',
     });
   })];
   
@@ -44,6 +59,13 @@ exports.user_detail = [
   // Display Users delete form on GET.
 exports.user_delete_get = [
   isAuth,
+  (req, res, next) => {
+    if (req.params.id == req.user._id) {
+      next()
+    } else {
+      res.render('edit_error')
+    }
+  },
   asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id).exec()
   if (user === null) {
@@ -61,13 +83,20 @@ exports.user_delete_get = [
 // Handle User delete on POST.
 exports.user_delete_post = [
   isAuth,
+  (req, res, next) => {
+    if (req.params.id == req.user._id) {
+      next()
+    } else {
+      res.render('edit_error')
+    }
+  },
   asyncHandler(async (req, res, next) => {
     const user = await User.findById(req.params.id).exec()
     const change = new Change({
-      user: req.user.username, 
+      user: req.user, 
       docType: 'User',
-      doc: user.username,
-      changeType: 'delete'
+      doc: user,
+      changeType: 'deleted'
     });
     await change.save()
     await User.deleteOne({_id: req.params.id}).exec();

@@ -71,7 +71,7 @@ exports.category_create_post = [
         console.log(req.body.name)
         // Create a category object with escaped and trimmed data.
         const category = new Category({
-             name: req.body.name, 
+             name: req.body.name,
              description: req.body.description
         });
 
@@ -97,10 +97,10 @@ exports.category_create_post = [
             } else {
                 await category.save();
                 const change = new Change({
-                  user: req.user.username, 
+                  user: req.user, 
                   docType: 'Category',
-                  doc: category.name,
-                  changeType: 'create'
+                  doc: category,
+                  changeType: 'created'
                 });
                 await change.save()
                 // New category saved. Redirect to category detail page.
@@ -158,10 +158,10 @@ exports.category_delete_post = [
       // Category has no recipies. Delete object and redirect to the list of categorys.
       await Category.findByIdAndDelete(req.body.categoryid);
       const change = new Change({
-        user: req.user.username, 
+        user: req.user, 
         docType: 'Category',
-        doc: category.name,
-        changeType: 'delete'
+        doc: category,
+        changeType: 'deleted'
       });
       await change.save()
 
@@ -226,10 +226,10 @@ exports.category_update_post = [
             const updatedCategory = await Category.findByIdAndUpdate(req.params.id, category, {});
             // Redirect to book detail page.
             const change = new Change({
-              user: req.user.username, 
+              user: req.user, 
               docType: 'Category',
-              doc: category.name,
-              changeType: 'update'
+              doc: category,
+              changeType: 'updated'
             });
             await change.save()
             res.redirect(updatedCategory.url);

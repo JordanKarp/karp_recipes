@@ -104,10 +104,10 @@ exports.tag_create_post = [
           } else {
               await tag.save();
               const change = new Change({
-                user: req.user.username, 
+                user: req.user, 
                 docType: 'Tag',
-                doc: tag.name,
-                changeType: 'create'
+                doc: tag,
+                changeType: 'created'
               });
               await change.save()
               // New tag saved. Redirect to tag detail page.
@@ -151,10 +151,10 @@ exports.tag_delete_post = [
     await Tag.findByIdAndDelete(req.body.tagid);
 
     const change = new Change({
-      user: req.user.username, 
+      user: req.user, 
       docType: 'Tag',
-      doc: tag.name,
-      changeType: 'delete'
+      doc: tag,
+      changeType: 'deleted'
     });
     await change.save()
     res.redirect("/data/tags");
@@ -219,10 +219,10 @@ exports.tag_update_post = [
                // Data from form is valid. Update the record.
             const updatedTag = await Tag.findByIdAndUpdate(req.params.id, tag, {});
             const change = new Change({
-              user: req.user.username, 
+              user: req.user, 
               docType: 'Tag',
-              doc: updatedTag.name,
-              changeType: 'update'
+              doc: updatedTag,
+              changeType: 'updated'
             });
             await change.save()
             

@@ -55,7 +55,10 @@ exports.search = asyncHandler(async (req, res, next) => {
 exports.changelog = [
   isAuth,
   asyncHandler(async (req, res, next) => {
-    const allChanges = await Change.find().sort({ createdAt: -1 })
+    const allChanges = await Change.find()
+      .populate('user')
+      .populate('doc')
+      .sort({ createdAt: -1 })
     res.render("changelog", {
       title: "Changelog",
       all_changes: allChanges,
@@ -91,10 +94,10 @@ exports.register = asyncHandler( async(req, res, next) => {
 
   await newUser.save()
   const change = new Change({
-    user: newUser.username, 
+    user: newUser,
     docType: 'User',
-    doc: newUser.username,
-    changeType: 'create'
+    doc: newUser,
+    changeType: 'created'
   });
   await change.save()
   req.login(newUser, function(err) {

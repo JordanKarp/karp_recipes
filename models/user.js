@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   salt: {type: String, required: true }
 });
 
+
 // Virtual for Users's URL
 UserSchema.virtual("url").get(function () {
     // We don't use an arrow function as we'll need the this object

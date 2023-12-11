@@ -28,13 +28,16 @@ block content
   hr
   h4 Ingredients:
   p(class='ingredients') #{recipe.ingredients}
-  
+
   hr
-  
+
   h4 Directions:
   p(class='directions') #{recipe.directions}
 
+  hr
   h4 Comments:
-  ul(class='commentList')
+  div(class='commentList')
     each com in recipe.comments 
-      li(class='comment') #{com.username} (#{com.date}): #{com.content}
+      div(class='comment')
+        p(class='commentHead') #[strong #{com.user.username}] -  (#{com.date}):
+        p(class='commentBody') #{com.content}

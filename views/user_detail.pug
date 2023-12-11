@@ -5,5 +5,32 @@ block content
   h1 User: #{selected_user.username}
 
   hr
-  p
-    a(href=selected_user.url+'/delete') Delete user
+  h3 Comments:
+  if selected_user_comments
+    each comment, index in selected_user_comments
+      if selected_user_comments[index-1] == undefined || comment.date !== selected_user_comments[index-1].date
+        p #{comment.date}
+      endif
+      p(class='indent') #{comment.time} - 
+        a(href=comment.recipe.url) #{comment.recipe.title}
+        | : #{comment.content}
+  else
+    p No comments made.
+  
+  hr
+  h3 Changes:
+  if selected_user_changes
+    each change, index in selected_user_changes
+      if selected_user_changes[index-1] == undefined || change.date !== selected_user_changes[index-1].date
+        p #{change.date}
+      endif
+      p(class='indent') #{change.time} -  #{change.changeType.charAt(0).toUpperCase() + change.changeType.slice(1)} #{change.docType}: 
+        a(href=change.doc.url) #{change.doc.title}
+  else
+    p No changes made.
+
+
+  if selected_user._id.equals(user._id)
+    hr
+    p
+      a(href=selected_user.url+'/delete') Delete user
