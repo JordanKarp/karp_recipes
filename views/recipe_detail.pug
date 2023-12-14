@@ -19,6 +19,9 @@ block content
   p Category: 
    a(href=recipe.category.url) #{recipe.category.name}
   p Serves: #{recipe.serves || ''}
+  p(style='display: inline') Rating: 
+    div(class="Hearts", style=`--rating: ${rating.value};`)
+    | (#{rating.count})
   p Tags: 
     each val, index in recipe.tags
       a(href=val.url) #{val.name}
@@ -37,7 +40,16 @@ block content
   hr
   h4 Comments:
   div(class='commentList')
+
+  table
     each com in recipe.comments 
-      div(class='comment')
-        p(class='commentHead') #[strong #{com.user.username}] -  (#{com.date}):
-        p(class='commentBody') #{com.content}
+      tr(class='comment')
+        if com.rating
+          td(class='commentHead') #[strong #{com.user.username}] - #{com.date} -  #{String.fromCharCode(0x2665).repeat(com.rating)} -
+          td #{com.content}
+        else
+          td(class='commentHead') #[strong #{com.user.username}] - #{com.date} -
+          td #{com.content}
+        //- p(class='commentBody') #{com.content}
+    else
+      p There are no comments on this recipe yet.

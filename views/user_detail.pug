@@ -11,11 +11,11 @@ block content
       if selected_user_comments[index-1] == undefined || comment.date !== selected_user_comments[index-1].date
         p #{comment.date}
       endif
-      p(class='indent') #{comment.time} - 
-        a(href=comment.recipe.url) #{comment.recipe.title}
+      p(class='indent') #{comment.time} - #{comment.recipe.title} 
+        a(href=comment.recipe.url)  &#129109;
         | : #{comment.content}
-  else
-    p No comments made.
+    else
+      p No comments made.
   
   hr
   h3 Changes:
@@ -24,8 +24,7 @@ block content
       if selected_user_changes[index-1] == undefined || change.date !== selected_user_changes[index-1].date
         p #{change.date}
       endif
-      p(class='indent') #{change.time} -  #{change.changeType.charAt(0).toUpperCase() + change.changeType.slice(1)} #{change.docType}: 
-        a(href=change.doc.url) #{change.doc.title}
+      p(class='indent') #{change.time} -  #{change.changeType.charAt(0).toUpperCase() + change.changeType.slice(1)} #{change.docType}: #{change.docName}
   else
     p No changes made.
 

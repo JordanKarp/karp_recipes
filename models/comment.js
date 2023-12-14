@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
+  rating: { type: Number, trim: true },
   content: { type: String, trim: true, required: true },
   recipe: {type: Schema.Types.ObjectId, ref: 'Recipe'}
 }, { timestamps: true });

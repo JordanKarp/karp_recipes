@@ -6,6 +6,6 @@ block content
   ul
     each person in user_list
       li
-        a(href=person.url) #{person.username}
+        a(href=person.url) #{person.username || person.name}
     else
       li There are no users.

@@ -29,7 +29,7 @@ exports.tag_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific tag.
 exports.tag_detail = asyncHandler(async (req, res, next) => {
-    const [tag, recipiesInTag] = await Promise.all([
+    const [tag, recipesInTag] = await Promise.all([
         Tag.findById(req.params.id).exec(),
         Recipe.find({ tags: req.params.id }, "title").exec(),
     ]);
@@ -43,7 +43,7 @@ exports.tag_detail = asyncHandler(async (req, res, next) => {
     res.render("tag_detail", {
         title: "Tag Detail",
         tag: tag,
-        tag_recipes: recipiesInTag,
+        tag_recipes: recipesInTag,
         user: req.user || ''
     });
 });
@@ -106,7 +106,7 @@ exports.tag_create_post = [
               const change = new Change({
                 user: req.user, 
                 docType: 'Tag',
-                doc: tag,
+                docName: tag.name,
                 changeType: 'created'
               });
               await change.save()
@@ -122,7 +122,7 @@ exports.tag_delete_get = [
   isAuth,
   asyncHandler(async (req, res, next) => {
     // Get details of author and all their books (in parallel)
-    const [tag, allRecipiesInTag] = await Promise.all([
+    const [tag, allRecipesInTag] = await Promise.all([
       Tag.findById(req.params.id).exec(),
       Recipe.find({ tags: req.params.id }, "title").exec(),
     ]);
@@ -135,7 +135,7 @@ exports.tag_delete_get = [
     res.render("tag_delete", {
       title: "Delete Tag",
       tag: tag,
-      tag_recipies: allRecipiesInTag,
+      tag_recipes: allRecipesInTag,
       user: req.user || '',
     });
   })];
@@ -144,7 +144,7 @@ exports.tag_delete_get = [
 exports.tag_delete_post = [
   isAuth,
   asyncHandler(async (req, res, next) => {
-    // Get details of author and all their recipies (in parallel)
+    // Get details of author and all their recipes (in parallel)
     const tag = await Tag.findById(req.params.id).exec();
 
     // Delete object and redirect to the list of tags.
@@ -153,7 +153,7 @@ exports.tag_delete_post = [
     const change = new Change({
       user: req.user, 
       docType: 'Tag',
-      doc: tag,
+      docName: tag.name,
       changeType: 'deleted'
     });
     await change.save()
@@ -221,7 +221,7 @@ exports.tag_update_post = [
             const change = new Change({
               user: req.user, 
               docType: 'Tag',
-              doc: updatedTag,
+              docName: updatedTag.name,
               changeType: 'updated'
             });
             await change.save()

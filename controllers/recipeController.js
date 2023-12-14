@@ -33,7 +33,7 @@ exports.recipe_detail = asyncHandler(async (req, res, next) => {
       .populate('category')
       .populate('tags')
       .populate({
-        path: 'comments',			
+        path: 'comments',
         populate: { path:  'user', model: 'User' }
       })
       .exec();
@@ -43,10 +43,17 @@ exports.recipe_detail = asyncHandler(async (req, res, next) => {
       err.status = 404;
       return next(err);
     }
-  
+    const ratingComments = recipe.comments.filter(comment => !!comment.rating)
+    const rating = {
+      value: ratingComments.reduce((total, next) => total + next.rating, 0) / ratingComments.length,
+      count: ratingComments.length
+    }
+
+
     res.render("recipe_detail", {
       title: "Recipe:",
       recipe: recipe,
+      rating: rating,
       user: req.user || ''
     });
 });
@@ -145,7 +152,7 @@ exports.recipe_create_post = [
       const change = new Change({
         user: req.user, 
         docType: 'Recipe',
-        doc: recipe,
+        docName: recipe.name,
         changeType: 'created'
       });
       await change.save()
@@ -181,7 +188,7 @@ exports.recipe_delete_post = [
     const change = new Change({
       user: req.user, 
       docType: 'Recipe',
-      doc: recipe,
+      docName: recipe.name,
       changeType: 'deleted'
     });
     await change.save()
@@ -299,7 +306,7 @@ exports.recipe_update_post = [
         const change = new Change({
           user: req.user, 
           docType: 'Recipe',
-          doc: updatedRecipe,
+          docName: updatedRecipe.name,
           changeType: 'updated'
         });
         await change.save()
@@ -310,7 +317,7 @@ exports.recipe_update_post = [
     }),
 ];
 
-// Display recipe create form on GET.
+// Display recipe comment create form on GET.
 exports.recipe_comment_get = [
   isAuth,
   asyncHandler(async (req, res, next) => {
@@ -330,14 +337,14 @@ exports.recipe_comment_get = [
      });
 })];
 
-// Handle recipe create on POST.
+// Handle recipe comment create on POST.
 exports.recipe_comment_post = [
   isAuth,
   // Validate and sanitize fields.
   body("content")
     .trim()
     .isLength({ min: 1 })
-    .withMessage("Comment cannot be blank."),
+    .withMessage("Comment may not be blank."),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
@@ -347,8 +354,8 @@ exports.recipe_comment_post = [
     const recipe = await Recipe.findById(req.params.id).exec()
     // Create Recipe object with escaped and trimmed data
     const comment = new Comment({
-      username: req.user.username,
       user: req.user,
+      rating: Number(req.body.rating),
       content: req.body.content,
       recipe: recipe,
     });
@@ -371,7 +378,7 @@ exports.recipe_comment_post = [
       const change = new Change({
         user: req.user,
         docType: 'Recipe',
-        doc: recipe,
+        docName: recipe.title,
         changeType: 'commented on'
       });
       await comment.save();

@@ -29,7 +29,6 @@ exports.user_detail = [
       User.findById(req.params.id).exec(),
       Change.find({user: req.params.id})
         .populate('user')
-        .populate('doc')
         .sort({ createdAt: -1 })
         .exec(),
       Comment.find({user: req.params.id})
@@ -63,7 +62,7 @@ exports.user_delete_get = [
     if (req.params.id == req.user._id) {
       next()
     } else {
-      res.render('edit_error')
+      res.render('edit_error', {user: req.user || ''})
     }
   },
   asyncHandler(async (req, res, next) => {
@@ -95,7 +94,7 @@ exports.user_delete_post = [
     const change = new Change({
       user: req.user, 
       docType: 'User',
-      doc: user,
+      docName: user.name,
       changeType: 'deleted'
     });
     await change.save()

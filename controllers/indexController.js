@@ -13,7 +13,7 @@ const { isAuth } = require("../config/authMiddleware");
 
 exports.index = asyncHandler(async (req, res, next) => {
   let [
-    numRecipies,
+    numRecipes,
     numCategories,
     numTags,
     randomRecipe
@@ -31,7 +31,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 
   res.render("index", {
     title: "Karp Family Recipes",
-    recipe_count: numRecipies,
+    recipe_count: numRecipes,
     category_count: numCategories,
     tag_count: numTags,
     recipe: randomRecipe[0],
@@ -57,7 +57,6 @@ exports.changelog = [
   asyncHandler(async (req, res, next) => {
     const allChanges = await Change.find()
       .populate('user')
-      .populate('doc')
       .sort({ createdAt: -1 })
     res.render("changelog", {
       title: "Changelog",
@@ -87,7 +86,7 @@ exports.register = asyncHandler( async(req, res, next) => {
   const {salt, hash} = saltHash;
 
   const newUser = new User({
-      username:req.body.username,
+      user:req.body.username,
       hash: hash,
       salt: salt,
   });
@@ -96,7 +95,7 @@ exports.register = asyncHandler( async(req, res, next) => {
   const change = new Change({
     user: newUser,
     docType: 'User',
-    doc: newUser,
+    docName: newUser.name,
     changeType: 'created'
   });
   await change.save()

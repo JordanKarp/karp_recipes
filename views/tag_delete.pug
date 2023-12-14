@@ -3,15 +3,15 @@ extends layout
 block content
   h1 #{title}: #{tag.name}
 
-  if tag_recipies.length
+  if tag_recipes.length
 
     p #[strong The following recipes will lose this tag:]
 
     div(style='margin-left:20px;margin-top:20px')
       ul
-      each recipe in tag_recipies
+      each recipe in tag_recipes
         li
-          a(href=recipe.url) #{recipe.title}
+          a(href=recipe.url) #{recipe.name}
 
   p Do you really want to delete the tag #{tag.name}?
 

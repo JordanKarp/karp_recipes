@@ -6,8 +6,19 @@ block content
   h3 #{recipe.title}
 
   form(method='POST' action='')
+    div(class='ratingForm')
+      input(type='radio', id='heart5', name='rating', value='5' hidden)
+      label(for='heart5', title='Excellent')
+      input(type='radio', id='heart4', name='rating', value='4' hidden)
+      label(for='heart4', title='Above Average')
+      input(type='radio', id='heart3', name='rating', value='3' hidden)
+      label(for='heart3', title='Average')
+      input(type='radio', id='heart2', name='rating', value='2' hidden)
+      label(for='heart2', title='Below Average')
+      input(type='radio', id='heart1', name='rating', value='1' hidden)
+      label(for='heart1', title='Poor')
     div.form-group
-      label(for='content') Comment:
+      label(for='content' hidden) Comment:
       textarea#content(type='textarea', placeholder='Leave your comment here' name='content' rows='4' required='true' value=(undefined===comment ? '' : comment.content) )
     button#submit(type='submit') Submit
 

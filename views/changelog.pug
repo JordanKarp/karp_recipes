@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  h1= title
+  h1 Update Log
 
   ul
     each change, index in all_changes
       if all_changes[index-1] == undefined || change.date !== all_changes[index-1].date
         li #{change.date}
       endif
-      li(class='indent') #{change.time} - #{change.user.username} #{change.changeType} the #{change.docType}: #{change.doc.title || change.doc.name || change.doc.username}
+      li(class='indent') #{change.time} - #{change.user.username} #{change.changeType} the #{change.docType}: #{change.docName}
 
     else
       li There are no changes logged yet.

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const ChangeSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
-    doc: { type: Schema.Types.ObjectId, refPath: 'docType', required: true},
+    docName: { type: String, required: true},
     docType: { type: String, required: true, enum: ['Recipe', 'Category', 'Tag', 'Comment', 'User']},
     changeType: {  type: String, required: true},
 }, { timestamps: true });

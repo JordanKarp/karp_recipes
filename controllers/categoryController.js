@@ -85,7 +85,6 @@ exports.category_create_post = [
             });
         return;
         } else {
-            console.log(category)
             // Data from form is valid.
             // Check if category with same name already exists.
             const categoryExists = await Category.findOne({ name: req.body.name })
@@ -99,7 +98,7 @@ exports.category_create_post = [
                 const change = new Change({
                   user: req.user, 
                   docType: 'Category',
-                  doc: category,
+                  docName: category.name,
                   changeType: 'created'
                 });
                 await change.save()
@@ -160,7 +159,7 @@ exports.category_delete_post = [
       const change = new Change({
         user: req.user, 
         docType: 'Category',
-        doc: category,
+        docName: category.name,
         changeType: 'deleted'
       });
       await change.save()
@@ -228,7 +227,7 @@ exports.category_update_post = [
             const change = new Change({
               user: req.user, 
               docType: 'Category',
-              doc: category,
+              docName: category.name,
               changeType: 'updated'
             });
             await change.save()
