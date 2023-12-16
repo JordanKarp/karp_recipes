@@ -1,12 +1,12 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
     meta(charset="utf-8")
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div(class='sidebar')
+    nav(class='sidebar')
       block sidebar
         div
           a(href='/') Home
@@ -25,15 +25,16 @@ html
         div
           form(method='POST' action='/search' name='searchForm')
             div(style='display:flex')
+              label(for='search' hidden)Search Bar:
               input#search.form-control(type='text', placeholder='Search...' name='search')
               button(type='submit' class='searchButton')
-                img(src='/images/search-regular-24.png')
+                img(src='/images/search-regular-24.png' alt='Search Button Icon')
 
 
 
-    div(class='content')
+    main(class='content')
       block content
 
-    div(class='footer')
+    footer(class='footer')
       p © Copyright 2023, 
        a(href='https://jordankarp.github.io/') Jordan Karp
