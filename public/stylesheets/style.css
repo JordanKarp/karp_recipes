@@ -77,7 +77,7 @@ hr {
   flex-grow: 1;
 }
 
-div.content {
+main.content {
   margin-left: 200px;
   padding: 2px 16px;
   height: 100%;
@@ -197,7 +197,7 @@ div.content {
   }
 
   .footer,
-  div.content {
+  main.content {
     margin-left: 0;
   }
 }
