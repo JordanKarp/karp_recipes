@@ -86,7 +86,7 @@ exports.register = asyncHandler( async(req, res, next) => {
   const {salt, hash} = saltHash;
 
   const newUser = new User({
-      user:req.body.username,
+      username:req.body.username,
       hash: hash,
       salt: salt,
   });
