@@ -101,16 +101,12 @@ exports.user_delete_post = [
 
     await User.deleteOne({_id: req.params.id}).exec();
     if (user.equals(req.user)) {
-      console.log('equal')
-      // this.logout()
-      // res.redirect("/");
       req.logout(function(err) {
         if (err) { return next(err); }
         res.redirect('/');
       });
     }
     else {
-      console.log('not equal')
       res.redirect("/user/all");
     }
 })];
