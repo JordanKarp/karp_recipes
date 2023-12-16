@@ -95,7 +95,7 @@ exports.register = asyncHandler( async(req, res, next) => {
   const change = new Change({
     user: newUser,
     docType: 'User',
-    docName: newUser.name,
+    docName: newUser.username,
     changeType: 'created'
   });
   await change.save()
