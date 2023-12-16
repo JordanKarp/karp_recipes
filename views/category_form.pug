@@ -4,7 +4,7 @@ block content
 
   h1 #{title}
 
-  form(method='POST' action='')
+  form(method='POST' action='' name='categoryForm')
     div.form-group
       label(for='name') Category:
       input#name(type='text', placeholder='Breakfast, Snacks etc.' name='name' required='true' value=(undefined===category ? '' : category.name) )

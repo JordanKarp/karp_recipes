@@ -3,7 +3,7 @@ extends layout
 block content
   h1 Please create an account below:
 
-  form(method='POST' action='')
+  form(method='POST' action='' name='registerForm')
     label(for='username') Username:
     input#username(type='text' placeholder='Username' name='username' required='true' value=(undefined===user ? '' : user.username) )
     label(for='password') Password:

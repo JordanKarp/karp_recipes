@@ -4,7 +4,7 @@ block content
 
   h1 #{title}
 
-  form(method='POST' action='')
+  form(method='POST' action='' name='tagForm')
     div.form-group
       label(for='name') Tag:
       input#name.form-control(type='text', placeholder='Tag name' name='name' required='true' value=(undefined===tag ? '' : tag.name) )

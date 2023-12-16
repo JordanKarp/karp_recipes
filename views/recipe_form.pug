@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
 
-  form(method='POST' action='')
+  form(method='POST' action='' name='recipeForm')
     div.form-group
       label(for='title') #[em(class='req') *] Title:
       input#title(type='text', placeholder='Name of Recipe' name='title' required='true' value=(undefined===recipe ? '' : recipe.title) )

@@ -94,16 +94,23 @@ exports.user_delete_post = [
     const change = new Change({
       user: req.user, 
       docType: 'User',
-      docName: user.name,
+      docName: String(user.name),
       changeType: 'deleted'
     });
     await change.save()
+
     await User.deleteOne({_id: req.params.id}).exec();
-    if (user === req.user) {
-      this.logout()
-      res.redirect("/");
+    if (user.equals(req.user)) {
+      console.log('equal')
+      // this.logout()
+      // res.redirect("/");
+      req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
     }
     else {
+      console.log('not equal')
       res.redirect("/user/all");
     }
 })];

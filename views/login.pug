@@ -6,7 +6,7 @@ block content
   - console.log(req)
 
 
-  form(method='POST' action='')
+  form(method='POST' action='' name='loginForm')
     label(for='username' hidden) Username:
     input#username(type='text' placeholder='Username' name='username' required='true' value=(undefined===user ? '' : user.username) )
     label(for='password' hidden) Password:
