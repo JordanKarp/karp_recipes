@@ -42,6 +42,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 exports.search = asyncHandler(async (req, res, next) => {
   const searchTerm = req.body.search
+  if (!searchTerm) return
   const allResults = await Recipe.find({ $text : { $search : searchTerm } }).sort({ title: 1 })
   res.render("search_results", {
     title: "Search Results",
