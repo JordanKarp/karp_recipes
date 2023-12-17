@@ -9,7 +9,7 @@ block content
         li #{change.date}
       endif
       - console.log(change.user, change.user.username )
-      li(class='indent') #{change.time} - #{change.user === null ? 'A user': change.user.username } #{change.changeType} the #{change.docType}: #{change.docName}
+      li(class='indent') #{change.time} - #{change.user} #{change.changeType} the #{change.docType}: #{change.docName}
 
     else
       li There are no changes logged yet.
