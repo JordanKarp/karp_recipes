@@ -8,7 +8,7 @@ block content
       if all_changes[index-1] == undefined || change.date !== all_changes[index-1].date
         li #{change.date}
       endif
-      li(class='indent') #{change.time} - #{change.user.username === undefined ? 'A user': change.user.username} #{change.changeType} the #{change.docType}: #{change.docName}
+      li(class='indent') #{change.time} - #{change.user.username == null ? 'A user': change.user.username } #{change.changeType} the #{change.docType}: #{change.docName}
 
     else
       li There are no changes logged yet.
