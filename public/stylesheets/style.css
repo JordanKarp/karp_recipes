@@ -1,6 +1,7 @@
 :root {
   --link-color: #00597c;
   --link-highlight-color: #00B7FF;
+  --grey-color: #f1f1f1;
 }
 
 *,
@@ -10,9 +11,29 @@
   list-style-type: none;
   font-family: system-ui, sans-serif;
   border-radius: 4px;
+
 }
 
 
+/* Scrollbar Color */
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--link-color);
+  -webkit-border-radius: 1ex;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000;
+}
+
+
+/* BASIC TAG CSS */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -25,43 +46,22 @@ a:hover {
   color: var(--link-highlight-color);
 }
 
-
 hr {
   border-top: 1px solid var(--link-color);
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-}
 
-.ingredients,
-.directions {
-  white-space: pre-wrap
-}
 
-.tagList {
-  list-style: none;
-  display: inline;
-  padding: .3rem;
-  margin: .3rem;
-}
-
+/* SIDEBAR CONTENT */
 .sidebar {
   margin: 0;
   padding: 0;
   width: 200px;
-  background-color: #f1f1f1;
+  background-color: var(--grey-color);
   position: fixed;
   height: 100%;
   overflow: auto;
   list-style: none;
-
 }
 
 .sidebar a {
@@ -71,12 +71,10 @@ hr {
   text-decoration: none;
 }
 
-
 .sidebar a:hover {
-  background-color: #00597c;
+  background-color: var(--link-color);
   color: white;
 }
-
 
 #search {
   flex-grow: 1;
@@ -98,10 +96,9 @@ hr {
 .search:focus,
 .searchButton:hover {
   border: 1px solid var(--link-highlight-color);
-
 }
 
-
+/* MAIN CONTENT CSS */
 main.content {
   margin-left: 200px;
   padding: 2px 16px;
@@ -109,14 +106,10 @@ main.content {
   min-height: 90vh;
 }
 
-.footer {
-  margin-left: 200px;
-  text-align: center;
-  position: sticky;
-}
 
+/* HOMEPAGE CSS */
 .random {
-  background-color: #f1f1f1;
+  background-color: var(--grey-color);
   padding: 1rem;
   margin: 1rem;
   position: relative;
@@ -135,6 +128,51 @@ main.content {
   left: -0.5rem;
 }
 
+/* RECIPE CSS */
+.ingredients,
+.directions {
+  white-space: pre-wrap
+}
+
+.tagList {
+  list-style: none;
+  display: inline;
+  padding: .3rem;
+  margin: .3rem;
+}
+
+.commentBody {
+  padding: 0 1rem;
+}
+
+.Hearts {
+  --percent: calc(var(--rating) / 5 * 100%);
+
+  display: inline;
+
+  &::before {
+    content: '♥♥♥♥♥';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, red var(--percent), var(--grey-color) var(--percent));
+    /* background-clip: text; */
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* FORM CSS */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--link-color);
+}
+
 .control,
 .addComment,
 .update,
@@ -149,20 +187,8 @@ main.content {
   width: 100%;
   padding: 1rem;
   margin: 1rem 0;
+  border: 1px solid var(--link-color);
 }
-
-.commentBody {
-  padding: 0 1rem;
-}
-
-/* .ratingBtn {
-  background-color: white;
-  border: none;
-  outline: none;
-  padding: 0 .2rem;
-  font-size: 2rem;
-  text-align: center;
-} */
 
 .ratingForm {
   display: inline-block;
@@ -189,21 +215,16 @@ main.content {
   content: '\2665';
 }
 
-.Hearts {
-  --percent: calc(var(--rating) / 5 * 100%);
 
-  display: inline;
-
-  &::before {
-    content: '♥♥♥♥♥';
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, red var(--percent), #f1f1f1 var(--percent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+/* FOOTER CSS */
+.footer {
+  margin-left: 200px;
+  text-align: center;
+  position: sticky;
 }
 
 
+/* CSS CLASSES */
 
 .indent {
   padding-left: 1rem;
@@ -213,6 +234,7 @@ main.content {
   color: red;
 }
 
+/* MEDIA QUERIES*/
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
   .sidebar {
