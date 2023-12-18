@@ -33,10 +33,10 @@ html(lang='en')
         endif
         div
           form(method='POST' action='/search' name='searchForm')
-            div(style='display:flex')
+            div(class='searchDiv')
               label(for='search' hidden) Search Bar
               input.form-control(type='text', placeholder='Search...' name='search'  id='search' required)
-              button(type='submit' class='searchButton')
+              button(type='submit' class='searchButton flex')
                 img(src='/images/search-regular-24.png' alt='Search Button Icon')
 
 

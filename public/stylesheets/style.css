@@ -1,3 +1,8 @@
+:root {
+  --link-color: #00597c;
+  --link-highlight-color: #00B7FF;
+}
+
 *,
 *::before,
 *::after {
@@ -13,16 +18,16 @@ body {
 }
 
 a {
-  color: #00597c;
+  color: var(--link-color);
 }
 
 a:hover {
-  color: #00B7FF;
+  color: var(--link-highlight-color);
 }
 
 
 hr {
-  border-top: 1px solid #00597c;
+  border-top: 1px solid var(--link-color);
 }
 
 .form-group input,
@@ -77,6 +82,18 @@ hr {
   flex-grow: 1;
 }
 
+.searchDiv {
+  display: flex;
+}
+
+.searchDiv>* {
+  border: 1px solid black;
+}
+
+.searchButton {
+  display: flex;
+}
+
 main.content {
   margin-left: 200px;
   padding: 2px 16px;
@@ -94,6 +111,21 @@ main.content {
   background-color: #f1f1f1;
   padding: 1rem;
   margin: 1rem;
+  position: relative;
+}
+
+.random h3 {
+  margin-top: 0.2rem;
+}
+
+.newRandomBtn {
+  /* border-bottom: 2px solid var(--link-color); */
+  color: var(--link-color);
+  font-size: 2rem;
+  text-decoration: none;
+  position: absolute;
+  top: -1.5rem;
+  left: -0.5rem;
 }
 
 .control,

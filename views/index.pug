@@ -27,9 +27,13 @@ block content
   p Enjoy this database of some of my family's favorite recipes. And please create an account and add your own!
   hr
   h2 Random Recipe: 
+
   div(class='random')
-    h3 
-        a(href=recipe.url) #{recipe.title}
+    a(href='/' class='newRandomBtn') ⟳
+
+      //- img(src='/images/reload-icon.png' class='newRandomBtn' alt='Search Button Icon' style='width:25px; height: 25px;')
+    h3
+      a(href=recipe.url) #{recipe.title}
     p Category: 
       a(href=recipe.category.url) #{recipe.category.name}
     if recipe.serves
