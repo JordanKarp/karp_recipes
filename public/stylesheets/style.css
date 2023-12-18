@@ -87,12 +87,20 @@ hr {
 }
 
 .searchDiv>* {
-  border: 1px solid black;
+  border: 1px solid var(--link-color);
 }
 
 .searchButton {
   display: flex;
 }
+
+.search:hover,
+.search:focus,
+.searchButton:hover {
+  border: 1px solid var(--link-highlight-color);
+
+}
+
 
 main.content {
   margin-left: 200px;
@@ -115,11 +123,10 @@ main.content {
 }
 
 .random h3 {
-  margin-top: 0.2rem;
+  margin-top: 0;
 }
 
 .newRandomBtn {
-  /* border-bottom: 2px solid var(--link-color); */
   color: var(--link-color);
   font-size: 2rem;
   text-decoration: none;
