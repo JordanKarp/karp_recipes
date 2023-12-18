@@ -159,9 +159,6 @@ main.content {
   padding: 0 1rem;
 }
 
-.bulletedList {
-  padding-left: 1rem;
-}
 
 .recipeList {
   columns: 2;
@@ -183,15 +180,28 @@ main.content {
 
 .letterBox li a {
   display: inline-block;
+  object-fit: contain;
   text-align: center;
-  padding: 4px;
+  padding: 2px;
 }
 
+.bulletedList {
+  display: inline-block;
+  padding-left: 2rem;
+  text-indent: -0.7rem;
+}
+
+.bulletedList li {
+  padding: 0 2px;
+  margin: 0 6px;
+}
+
+
 .bulletedList li::before {
-  content: "\2022 ";
+  content: "\2022";
   color: var(--link-color);
   display: inline-block;
-  width: .5rem;
+  width: .1rem;
 }
 
 .Hearts {
