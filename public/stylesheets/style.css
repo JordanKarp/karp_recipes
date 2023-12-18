@@ -28,9 +28,7 @@
   -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
 }
 
-::-webkit-scrollbar-corner {
-  background: #000;
-}
+
 
 
 /* BASIC TAG CSS */
@@ -88,6 +86,7 @@ ul {
 
 .searchDiv {
   display: flex;
+  margin: 16px 0;
 }
 
 .searchDiv>* {
@@ -170,6 +169,24 @@ main.content {
   -moz-columns: 2;
 }
 
+.letterBox {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.letterBox li {
+  float: left;
+}
+
+.letterBox li a {
+  display: inline-block;
+  text-align: center;
+  padding: 4px;
+}
+
 .bulletedList li::before {
   content: "\2022 ";
   color: var(--link-color);
@@ -203,6 +220,7 @@ main.content {
   padding: 0.5rem;
   margin: 0.5rem 0;
   border: 1px solid var(--link-color);
+
 }
 
 .control,
@@ -213,15 +231,19 @@ main.content {
   padding: 0.5rem;
 }
 
-#username,
-#password,
 #submit {
   width: 100%;
-  padding: 1rem;
-  margin: 1rem 0;
-  border: 1px solid var(--link-color);
+  padding: .8rem;
+  margin: 1rem auto;
   color: #fff;
   background-color: var(--link-color);
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+#submit:hover {
+  background-color: var(--link-highlight-color);
+  color: #000;
 }
 
 .ratingForm {
@@ -295,6 +317,10 @@ main.content {
     columns: 1;
     -webkit-columns: 1;
     -moz-columns: 1;
+  }
+
+  .searchDiv {
+    margin: 2px 0 10px 0;
   }
 
   .footer,

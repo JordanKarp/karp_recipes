@@ -2,7 +2,13 @@ extends layout
 
 block content
   h1= title
-
+  ul(class='letterBox')
+    li
+      a(href='/data/recipes') All
+    each letter in alphabet
+      li
+        a(href=`/data/recipes/${letter}`) #{letter}
+  hr
   ol(class="bulletedList recipeList")
     each recipe in recipe_list
       li

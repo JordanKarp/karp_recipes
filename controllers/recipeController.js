@@ -20,11 +20,30 @@ exports.recipe_list = asyncHandler(async (req, res, next) => {
       .sort({ title: 1 })
       .populate('category')
       .exec();
-    res.render("recipe_list", { 
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X','Y', 'Z']
+    res.render("recipe_list", {
       title: "Recipe List", 
       recipe_list: allRecipes,
+      alphabet: alphabet,
       user: req.user || '',
    });
+});
+
+// Display list of all Recipes by letter.
+exports.recipe_list_letter = asyncHandler(async (req, res, next) => {
+  var regex = new RegExp("^"+ req.params.letter);
+  console.log(regex)
+  const allRecipesLetter = await Recipe.find({"title": {$regex: regex, $options: 'i'}})
+    .sort({ title: 1 })
+    .populate('category')
+    .exec();
+  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X','Y', 'Z']
+  res.render("recipe_list", {
+    title: "Recipe List", 
+    recipe_list: allRecipesLetter,
+    alphabet: alphabet,
+    user: req.user || '',
+ });
 });
 
 // Display detail page for a specific recipe.
@@ -306,7 +325,7 @@ exports.recipe_update_post = [
         const change = new Change({
           user: req.user, 
           docType: 'Recipe',
-          docName: updatedRecipe.title,
+          docName: updatedRecipe.name,
           changeType: 'updated'
         });
         await change.save()

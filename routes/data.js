@@ -72,6 +72,10 @@ router.get("/recipe/:id", recipe_controller.recipe_detail);
 // GET request for list of all recipe items.
 router.get("/recipes", recipe_controller.recipe_list);
 
+// GET request for list of all recipe items under a certain letter.
+
+router.get("/recipes/:letter([a-zA-Z])", recipe_controller.recipe_list_letter);
+
 
 /// Tag ROUTES ///
 // GET tag home page.
