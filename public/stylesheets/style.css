@@ -82,11 +82,16 @@ ul {
 
 #search {
   flex-grow: 1;
+  padding: 16px 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .searchDiv {
   display: flex;
-  margin: 16px 0;
+  box-sizing: border-box;
+  /* margin: 16px 0; */
+
 }
 
 .searchDiv>* {
@@ -96,7 +101,10 @@ ul {
 .searchButton {
   display: flex;
   background-color: var(--link-color);
+  align-items: center;
   transition: all 0.3s;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0
 }
 
 .searchButton img {
