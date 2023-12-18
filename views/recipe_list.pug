@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
 
-  ol(class='recipeList')
+  ol(class="bulletedList recipeList")
     each recipe in recipe_list
       li
         a(href=recipe.url) #{recipe.title}

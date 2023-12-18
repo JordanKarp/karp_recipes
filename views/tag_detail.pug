@@ -23,7 +23,7 @@ block content
   else
     h4  #{tag_recipes.length} recipes with the tag #{tag.name}:
   endif
-  ul
+  ul(class='bulletedList')
     each recipe in tag_recipes
       li
         a(href=recipe.url) #{recipe.title}

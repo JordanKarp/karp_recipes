@@ -96,13 +96,22 @@ ul {
 
 .searchButton {
   display: flex;
+  background-color: var(--link-color);
+  transition: all 0.3s;
 }
 
-.search:hover,
-.search:focus,
-.searchButton:hover {
-  border: 1px solid var(--link-highlight-color);
+.searchButton img {
+  filter: invert(1)
 }
+
+.searchButton:hover {
+  background-color: var(--link-highlight-color);
+}
+
+.searchButton:hover>img {
+  filter: invert(0);
+}
+
 
 /* MAIN CONTENT CSS */
 main.content {
@@ -151,8 +160,7 @@ main.content {
   padding: 0 1rem;
 }
 
-.recipeList,
-.categoryList {
+.bulletedList {
   padding-left: 1rem;
 }
 
@@ -162,8 +170,7 @@ main.content {
   -moz-columns: 2;
 }
 
-.recipeList li::before,
-.categoryList li::before {
+.bulletedList li::before {
   content: "\2022 ";
   color: var(--link-color);
   display: inline-block;
@@ -284,10 +291,16 @@ main.content {
     display: none;
   }
 
-  /* .footer,
+  .recipeList {
+    columns: 1;
+    -webkit-columns: 1;
+    -moz-columns: 1;
+  }
+
+  .footer,
   main.content {
     margin-left: 0;
-  } */
+  }
 }
 
 

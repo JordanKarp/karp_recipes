@@ -25,20 +25,23 @@ html(lang='en')
         if user
           hr
           div
-            a(href='/user/all') Users
-            a(href='/changelog') Update Log
             a(href='/data/recipe/create') Create recipe
             a(href='/data/category/create') Create category
             a(href='/data/tag/create') Create tag
+          hr
+          div
+            a(href='/user/all') Users
+            a(href='/changelog') Update Log
+ 
         endif
+        hr
         div
           form(method='POST' action='/search' name='searchForm')
             div(class='searchDiv')
               label(for='search' hidden) Search Bar
               input.form-control(type='text', placeholder='Search...' name='search'  id='search' required)
               button(type='submit' class='searchButton flex' aria-label='Search')
-                img(src='/images/search-regular-24.png' alt='Search Button Icon')
-                
+                img(src='/images/search-alt-2-regular-48.png' alt='Search Button Icon' width='24px' height="24px")
 
 
 

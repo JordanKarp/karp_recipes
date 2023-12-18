@@ -306,7 +306,7 @@ exports.recipe_update_post = [
         const change = new Change({
           user: req.user, 
           docType: 'Recipe',
-          docName: updatedRecipe.name,
+          docName: updatedRecipe.title,
           changeType: 'updated'
         });
         await change.save()

@@ -4,7 +4,7 @@ block content
   h1= title
 
   h4 Search for: #{search_term} (#{results.length})
-  ul
+  ul(class="bulletedList")
     each thing in results
       li
         a(href=thing.url) #{thing.title}

@@ -22,7 +22,7 @@ block content
   else
     h4  #{category_recipes.length} recipes under #{category.name}:
   endif
-  ul
+  ul(class='bulletedList')
     each recipe in category_recipes
       li
         a(href=recipe.url) #{recipe.title}
