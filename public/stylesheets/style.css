@@ -50,6 +50,12 @@ hr {
   border-top: 1px solid var(--link-color);
 }
 
+ul {
+  list-style: none;
+  /* Remove default bullets */
+}
+
+
 
 
 /* SIDEBAR CONTENT */
@@ -145,6 +151,25 @@ main.content {
   padding: 0 1rem;
 }
 
+.recipeList,
+.categoryList {
+  padding-left: 1rem;
+}
+
+.recipeList {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+.recipeList li::before,
+.categoryList li::before {
+  content: "\2022 ";
+  color: var(--link-color);
+  display: inline-block;
+  width: .5rem;
+}
+
 .Hearts {
   --percent: calc(var(--rating) / 5 * 100%);
 
@@ -153,9 +178,9 @@ main.content {
   &::before {
     content: '♥♥♥♥♥';
     letter-spacing: 3px;
-    background: linear-gradient(90deg, red var(--percent), var(--grey-color) var(--percent));
-    /* background-clip: text; */
-    background-clip: border-box;
+    background: linear-gradient(90deg, var(--link-color) var(--percent), var(--grey-color) var(--percent));
+    background-clip: text;
+    /* background-clip: border-box; */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -188,6 +213,8 @@ main.content {
   padding: 1rem;
   margin: 1rem 0;
   border: 1px solid var(--link-color);
+  color: #fff;
+  background-color: var(--link-color);
 }
 
 .ratingForm {
@@ -208,7 +235,7 @@ main.content {
 .ratingForm label:hover,
 .ratingForm input:hover~label,
 .ratingForm input:checked~label {
-  color: red;
+  color: var(--link-highlight-color);
 }
 
 .ratingForm input:checked~label:before {
@@ -257,11 +284,12 @@ main.content {
     display: none;
   }
 
-  .footer,
+  /* .footer,
   main.content {
     margin-left: 0;
-  }
+  } */
 }
+
 
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 @media screen and (max-width: 400px) {
