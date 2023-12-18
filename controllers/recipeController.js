@@ -171,7 +171,7 @@ exports.recipe_create_post = [
       const change = new Change({
         user: req.user, 
         docType: 'Recipe',
-        docName: recipe.name,
+        docName: recipe.title,
         changeType: 'created'
       });
       await change.save()
@@ -207,7 +207,7 @@ exports.recipe_delete_post = [
     const change = new Change({
       user: req.user, 
       docType: 'Recipe',
-      docName: recipe.name,
+      docName: recipe.title,
       changeType: 'deleted'
     });
     await change.save()
@@ -325,7 +325,7 @@ exports.recipe_update_post = [
         const change = new Change({
           user: req.user, 
           docType: 'Recipe',
-          docName: updatedRecipe.name,
+          docName: updatedRecipe.title,
           changeType: 'updated'
         });
         await change.save()
