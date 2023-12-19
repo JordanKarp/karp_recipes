@@ -11,6 +11,7 @@
   list-style-type: none;
   font-family: system-ui, sans-serif;
   border-radius: 4px;
+  transition: all 0.2s;
 
 }
 

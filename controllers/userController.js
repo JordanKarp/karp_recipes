@@ -44,6 +44,7 @@ exports.user_detail = [
       err.status = 404;
       return next(err);
     }
+    console.log(userComments)
     // console.log(req.params.id == req.user._id)
     res.render("user_detail", {
       title: "User Detail",

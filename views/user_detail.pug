@@ -11,9 +11,15 @@ block content
       if selected_user_comments[index-1] == undefined || comment.date !== selected_user_comments[index-1].date
         p #{comment.date}
       endif
-      p(class='indent') #{comment.time} - #{comment.recipe.title} 
-        a(href=comment.recipe.url)  &#129109;
-        | : #{comment.content}
+      - const title = comment.recipe?.title || 'A deleted recipe'
+      - const url = comment.recipe?.url || ''
+      p(class='indent') #{comment.time} - #[strong #{title}]
+        if url 
+          |  [
+          a(href=url) Link
+          | ]: #{comment.content}
+        else 
+          | : #{comment.content}
     else
       p No comments made.
   
