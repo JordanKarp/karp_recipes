@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/JordanKarp/karp_recipes">
-    <img src="public/favicons/apple-touch-icon.png" alt="Logo" width="80" height="80">
+    <img src="public/favicons/apple-touch-icon.png" alt="Logo" width="80" height="80" style='border-radius: 4px'>
   </a>
 
   <h3 align="center">Karp Family Recipes</h3>
