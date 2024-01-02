@@ -212,5 +212,7 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [MongoDB-url]: https://mongodb.com
 [Mongoose.com]: https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
 [Mongoose-url]: https://mongoose.com
+[Express.com]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
+[Express-url]: https://expressjs.org
 [Pug.com]: https://img.shields.io/badge/pug-A86454?style=for-the-badge&logo=pug&logoColor=white
 [Pug-url]: https://pugjs.org
