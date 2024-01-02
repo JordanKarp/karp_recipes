@@ -56,6 +56,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#features">Features</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -81,12 +82,15 @@
 
 [![Karp Recipes Screen Shot][product-screenshot]](https://karprecipes-production.up.railway.app/)
 
+### Features
+
 A fully functioning online database for recipes, featuring:
 
-- View recipe details, including commments and ratings.
-- Recipe categories and recipe tags for easier browsing and sorting.
-- Search functionality
-- Authenticated login system
+- Homepage with login system and a random recipe.
+- Browse recipes by title, category or tag.
+- View full recipe details, including commments and ratings.
+- Search functionality.
+- Authenticated login system.
 
 As a logged in user:
 
@@ -109,10 +113,14 @@ As a logged in user:
 
 <!-- GETTING STARTED -->
 
+<!--
+
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+
+
 
 ### Prerequisites
 
@@ -140,6 +148,8 @@ This is an example of how to list things you need to use the software and how to
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+-->
 
 <!-- USAGE EXAMPLES -->
 
@@ -227,7 +237,7 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [MongoDB-url]: https://mongodb.com
 [Mongoose.com]: https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
 [Mongoose-url]: https://mongoose.com
-[Express.com]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
+[Express.com]: https://img.shields.io/badge/express-eeeeee?style=for-the-badge&logo=express&logoColor=black
 [Express-url]: https://expressjs.org
 [Pug.com]: https://img.shields.io/badge/pug-A86454?style=for-the-badge&logo=pug&logoColor=white
 [Pug-url]: https://pugjs.org
