@@ -229,5 +229,5 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
-[MongoDB.com]: https://img.shields.io/badge/mongodb-000000?style=for-the-badge&logo=mongodblogoColor=47A248
+[MongoDB.com]: https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=47A248
 [MongoDB-url]: https://mongodb.com
