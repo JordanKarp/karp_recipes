@@ -33,10 +33,10 @@
     <img src="public/favicons/apple-touch-icon.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Karp Family Recipes</h3>
+  <h3 align="center">Karp Family Recipes</h3>
 
   <p align="center">
-    A recipe database for the Karp family recipes.
+    A online database for the Karp family recipes.
     <br />
     <a href="https://github.com/JordanKarp/karp_recipes"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,7 +79,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Karp Recipes Screen Shot][product-screenshot]](https://example.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -207,7 +207,7 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [license-url]: https://github.com/JordanKarp/karp_recipes/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jordankarp
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: public/images/recipe_screen.png
 [MongoDB.com]: https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white
 [MongoDB-url]: https://mongodb.com
 [Mongoose.com]: https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
