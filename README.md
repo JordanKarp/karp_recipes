@@ -86,15 +86,15 @@
 
 A fully functioning online database for recipes, featuring:
 
-- Homepage with login system and a random recipe.
-- Browse recipes by title, category or tag.
+- Homepage with a random recipe and a navigation bar.
+- Browse all recipes by title, by category, or by tag.
 - View full recipe details, including commments and ratings.
 - Search functionality.
-- Authenticated login system.
+- Authenticated registration and login system.
 
 As a logged in user:
 
-- Create, update, and delete on recipes, categories and tags.
+- Create, update, and delete on recipes, categories, and tags.
 - Leave a comment and a rating on recipes.
 - View other users and their comments, ratings, and changes.
 - View all database changes.
@@ -152,14 +152,14 @@ This is an example of how to list things you need to use the software and how to
 -->
 
 <!-- USAGE EXAMPLES -->
-
+<!--
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ROADMAP -->
 
