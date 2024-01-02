@@ -79,7 +79,21 @@
 
 ## About The Project
 
-[![Karp Recipes Screen Shot][product-screenshot]](https://example.com)
+[![Karp Recipes Screen Shot][product-screenshot]](https://karprecipes-production.up.railway.app/)
+
+A fully functioning online database for recipes, featuring:
+
+- View recipe details, including commments and ratings.
+- Recipe categories and recipe tags for easier browsing and sorting.
+- Search functionality
+- Authenticated login system
+
+As a logged in user:
+
+- Create, update, and delete on recipes, categories and tags.
+- Leave a comment and a rating on recipes.
+- View other users and their comments, ratings, and changes.
+- View all database changes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,10 +155,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] Sub-Categories
+- [ ] Ratings on search page
+- [ ] Live search
+- [ ] Add more recipes!
 
 See the [open issues](https://github.com/JordanKarp/karp_recipes/issues) for a full list of proposed features (and known issues).
 
