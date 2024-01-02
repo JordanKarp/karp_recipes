@@ -89,6 +89,7 @@
 - [![Mongoose][Mongoose.com]][Mongoose-url]
 - [![Express][Express.com]][Express-url]
 - [![Pug][Pug.com]][Pug-url]
+- [![Passport][Passport.com]][Passport-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -216,3 +217,5 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [Express-url]: https://expressjs.org
 [Pug.com]: https://img.shields.io/badge/pug-A86454?style=for-the-badge&logo=pug&logoColor=white
 [Pug-url]: https://pugjs.org
+[Passport.com]: https://img.shields.io/badge/passport-34E27A?style=for-the-badge&logo=passport&logoColor=white
+[Passport-url]: https://passportjs.org
