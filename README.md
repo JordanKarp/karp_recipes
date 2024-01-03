@@ -36,21 +36,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#usage">Features and Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -65,7 +52,13 @@
 
 [![Karp Recipes Screen Shot][product-screenshot]](https://karprecipes-production.up.railway.app/)
 
-### Features
+[![MongoDB][MongoDB.com]][MongoDB-url] [![Mongoose][Mongoose.com]][Mongoose-url] [![NodeJS][Node.com]][Node-url] [![Express][Express.com]][Express-url] [![Pug][Pug.com]][Pug-url] [![Passport][Passport.com]][Passport-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+
+## Features and Usage
 
 A fully functioning online database for recipes, featuring:
 
@@ -80,37 +73,6 @@ As a logged in user:
 - Create, update, and delete on recipes, categories, and tags.
 - Leave a comment and a rating on recipes.
 - View other users and their comments, ratings, and changes.
-- View all database changes.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-- [![MongoDB][MongoDB.com]][MongoDB-url]
-- [![Mongoose][Mongoose.com]][Mongoose-url]
-- [![NodeJS][Node.com]][Node-url]
-- [![Express][Express.com]][Express-url]
-- [![Pug][Pug.com]][Pug-url]
-- [![Passport][Passport.com]][Passport-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-- Browse all recipes by title, by category, or by tag.
-
-- Search functionality.
-
-- Authenticated registration and login system.
-
-- Create, update, and delete on recipes, categories, and tags.
-
-- Leave a comment and a rating on recipes.
-
-- View other users and their comments, ratings, and changes.
-
 - View all database changes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
