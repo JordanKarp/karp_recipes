@@ -153,7 +153,7 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [MongoDB-url]: https://mongodb.com
 [Mongoose.com]: https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
 [Mongoose-url]: https://mongoose.com
-[Node.com]: https://img.shields.io/badge/nodejs-339933?style=for-the-badge&logo=nodejs&logoColor=black
+[Node.com]: https://img.shields.io/badge/nodedotjs-339933?style=for-the-badge&logo=nodedotjs&logoColor=black
 [Node-url]: https://nodejs.org
 [Express.com]: https://img.shields.io/badge/express-eeeeee?style=for-the-badge&logo=express&logoColor=black
 [Express-url]: https://expressjs.org
