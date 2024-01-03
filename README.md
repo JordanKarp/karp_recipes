@@ -105,6 +105,7 @@ As a logged in user:
 
 - [![MongoDB][MongoDB.com]][MongoDB-url]
 - [![Mongoose][Mongoose.com]][Mongoose-url]
+- [![NodeJS][Node.com]][Node-url]
 - [![Express][Express.com]][Express-url]
 - [![Pug][Pug.com]][Pug-url]
 - [![Passport][Passport.com]][Passport-url]
@@ -237,6 +238,8 @@ Project Link: [https://github.com/JordanKarp/karp_recipes](https://github.com/Jo
 [MongoDB-url]: https://mongodb.com
 [Mongoose.com]: https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white
 [Mongoose-url]: https://mongoose.com
+[Node.com]: https://img.shields.io/badge/node-000000?style=for-the-badge&logo=node&logoColor=339933
+[Node-url]: https://nodejs.org
 [Express.com]: https://img.shields.io/badge/express-eeeeee?style=for-the-badge&logo=express&logoColor=black
 [Express-url]: https://expressjs.org
 [Pug.com]: https://img.shields.io/badge/pug-A86454?style=for-the-badge&logo=pug&logoColor=white
