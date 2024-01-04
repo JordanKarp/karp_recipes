@@ -2,6 +2,13 @@
   --link-color: #00597c;
   --link-highlight-color: #00B7FF;
   --grey-color: #f1f1f1;
+  --background-color: #ffffff
+}
+
+.darkMode {
+  --link-color: #367c00;
+  --link-highlight-color: #00B7FF;
+  --grey-color: #f1f1f1;
 }
 
 *,
@@ -34,6 +41,7 @@
 
 /* BASIC TAG CSS */
 body {
+  background-color: var(--background-color);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
