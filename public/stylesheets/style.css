@@ -312,6 +312,11 @@ main.content {
   position: sticky;
 }
 
+.dark-mode-toggle {
+  border: 1px solid var(--link-color);
+}
+
+
 
 /* CSS CLASSES */
 
