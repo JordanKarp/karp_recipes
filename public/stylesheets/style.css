@@ -9,11 +9,11 @@
 }
 
 .darkMode {
-  --link-color: #ffffff;
-  --link-highlight-color: #000000;
-  --grey-color: #00B7FF;
+  --link-color: #00B7FF;
+  --link-highlight-color: #ffffff;
+  --grey-color: #00597c;
   --text-color: #f1f1f1;
-  --background-color: #00597c;
+  --background-color: #003a52;
   --button-text-color: #000000;
   --button-text-hover_color: #ffffff;
 }
