@@ -2,11 +2,15 @@
   --link-color: #00597c;
   --link-highlight-color: #00B7FF;
   --grey-color: #f1f1f1;
-  --background-color: #ffffff
+  --text-color: #000000;
+  --background-color: #ffffff;
+  --button-text-color: #ffffff;
+  --button-text-hover_color: #000000;
 }
 
 .darkMode {
-  --link-color: #367c00;
+  --background-color: #ffffff;
+  --link-color: #00597c;
   --link-highlight-color: #00B7FF;
   --grey-color: #f1f1f1;
 }
@@ -27,7 +31,7 @@
 ::-webkit-scrollbar {
   height: 12px;
   width: 12px;
-  background: #fff;
+  background: var(--background-color);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -42,6 +46,7 @@
 /* BASIC TAG CSS */
 body {
   background-color: var(--background-color);
+  color: var(--text-color);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -79,14 +84,14 @@ ul {
 
 .sidebar a {
   display: block;
-  color: black;
+  color: var(--text-color);
   padding: 16px;
   text-decoration: none;
 }
 
 .sidebar a:hover {
   background-color: var(--link-color);
-  color: white;
+  color: var(--background-color);
 }
 
 #search {
@@ -99,8 +104,6 @@ ul {
 .searchDiv {
   display: flex;
   box-sizing: border-box;
-  /* margin: 16px 0; */
-
 }
 
 .searchDiv>* {
@@ -262,7 +265,7 @@ main.content {
   width: 100%;
   padding: .8rem;
   margin: 1rem auto;
-  color: #fff;
+  color: var(--button-text-color);
   background-color: var(--link-color);
   transition: all 0.3s;
   font-weight: bold;
@@ -270,7 +273,7 @@ main.content {
 
 #submit:hover {
   background-color: var(--link-highlight-color);
-  color: #000;
+  color: var(--text-color);
 }
 
 .ratingForm {
