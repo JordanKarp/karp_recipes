@@ -14,7 +14,8 @@ html(lang='en')
     meta(name="msapplication-config", content="/favicons/browserconfig.xml")
     meta(name="theme-color", content="#ffffff")
     link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascript/darkMode.js' defer)
+    script(type="module", src="/javascript/darkMode.js" defer)
+
   body
     nav(class='sidebar')
       block sidebar
@@ -47,8 +48,6 @@ html(lang='en')
               input.form-control(type='text', placeholder='Search...' name='search'  id='search' required)
               button(type='submit' class='searchButton flex' aria-label='Search')
                 img(src='/images/search-alt-2-regular-48.png' alt='Search Button Icon' width='24px' height="24px")
-
-
 
     main(class='content')
       block content
