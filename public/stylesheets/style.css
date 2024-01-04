@@ -312,8 +312,15 @@ main.content {
   position: sticky;
 }
 
-.dark-mode-toggle {
+/* FOOTER CSS */
+.footer p {
+  margin-top: 2px;
+}
+
+#dark-mode-toggle {
   border: 1px solid var(--link-color);
+  color: var(--text-color);
+  background-color: var(--grey-color);
 }
 
 
